@@ -1,0 +1,18 @@
+ node_modules
+# Dependencies
+node_modules/
+# Build outputs
+build/
+dist/
+# Temporary files
+*.log
+*.tmp
+*.lock
+# Environment variables
+.env
+# Editor or IDE-specific files
+.vscode/
+.idea/
+# System files
+.DS_Store
+Thumbs.db

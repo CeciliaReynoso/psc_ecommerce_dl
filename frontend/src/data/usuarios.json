@@ -1,0 +1,43 @@
+[
+    {
+      "id": 1,
+      "email": "admin@example.com",
+      "password": "password_1", 
+      "rol": "admin",
+      "nombre": "Admin User",
+      "direccion": "123 Admin St, Lima, Peru"
+    },
+    {
+      "id": 2,
+      "email": "comprador@example.com",
+      "password": "password_2", 
+      "rol": "buyer",
+      "nombre": "Comprador User",
+      "direccion": "456 Comprador Ave, Lima, Peru"
+    },
+    {
+      "id": 3,
+      "email": "vendedor@example.com",
+      "password": "password_3", 
+      "rol": "seller",
+      "nombre": "Vendedor User",
+      "direccion": "789 Vendedor Blvd, Lima, Peru"
+    },
+    {
+      "id": 4,
+      "email": "cliente1@example.com",
+      "password": "password_4", 
+      "rol": "customer",
+      "nombre": "Cliente Uno",
+      "direccion": "101 Cliente Rd, Lima, Peru"
+    },
+    {
+      "id": 5,
+      "email": "cliente2@example.com",
+      "password": "password_5", 
+      "rol": "customer",
+      "nombre": "Cliente Dos",
+      "direccion": "202 Cliente Ln, Lima, Peru"
+    }
+  ]
+  
