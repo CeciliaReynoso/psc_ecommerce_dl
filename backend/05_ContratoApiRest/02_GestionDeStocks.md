@@ -599,5 +599,201 @@ Response:
   }
 }
 
+```yaml
+### Endpoint para obtener productos con stock mínimo en el backend
+```yaml
+app.get('/productos/stock_minimo', async (req, res) => {
+  try {
+    const client = await pool.connect();
+    const productosQuery = 'SELECT * FROM productos WHERE stock_actual <= stock_minimo';
+    const productosResult = await client.query(productosQuery);
+    client.release();
+    res.status(200).json(productosResult.rows);
+  } catch (error) {
+    console.error('Error al obtener productos con stock mínimo:', error);
+    res.status(500).json({ error: 'Error al obtener productos con stock mínimo' });
+  }
+});
+
+### Solicitud del endpoint en el frontend
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
+const ReporteStockMinimo = () => {
+  const [productos, setProductos] = useState([]);
+
+  useEffect(() => {
+    const fetchProductos = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/productos/stock_minimo');
+        setProductos(response.data);
+      } catch (error) {
+        console.error('Error al obtener productos con stock mínimo:', error);
+      }
+    };
+
+    fetchProductos();
+  }, []);
+
+  return (
+    <div>
+      <h1>Reporte de Productos con Stock Mínimo</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Stock Actual</th>
+            <th>Stock Mínimo</th>
+          </tr>
+        </thead>
+        <tbody>
+          {productos.map(producto => (
+            <tr key={producto.id_producto}>
+              <td>{producto.id_producto}</td>
+              <td>{producto.nombre}</td>
+              <td>{producto.stock_actual}</td>
+              <td>{producto.stock_minimo}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+export default ReporteStockMinimo;
+
+### Endpoint para crear un pedido a proveedor
+
+app.post('/pedidos_proveedor', async (req, res) => {
+  const { proveedor_id, detalles } = req.body;
+  try {
+    const client = await pool.connect();
+    await client.query('BEGIN');
+
+    // Crear un nuevo pedido a proveedor
+    const nuevoPedidoQuery = 'INSERT INTO pedidos_proveedor (proveedor_id, estado, total) VALUES ($1, $2, $3) RETURNING id_pedido_proveedor';
+    const nuevoPedidoResult = await client.query(nuevoPedidoQuery, [proveedor_id, 'pendiente de aprobación', 0]);
+    const nuevoPedidoId = nuevoPedidoResult.rows[0].id_pedido_proveedor;
+
+    // Añadir detalles del pedido a proveedor
+    let total = 0;
+    for (const detalle of detalles) {
+      const { producto_id, cantidad, precio_unitario } = detalle;
+      const subtotal = cantidad * precio_unitario;
+      total += subtotal;
+
+      const detallePedidoQuery = format(
+        'INSERT INTO detalles_pedido_proveedor (pedido_proveedor_id, producto_id, cantidad, precio_unitario, subtotal) VALUES %L',
+        [[nuevoPedidoId, producto_id, cantidad, precio_unitario, subtotal]]
+      );
+      await client.query(detallePedidoQuery);
+    }
+
+    // Actualizar el total del pedido a proveedor
+    const actualizarTotalQuery = 'UPDATE pedidos_proveedor SET total = $1 WHERE id_pedido_proveedor = $2';
+    await client.query(actualizarTotalQuery, [total, nuevoPedidoId]);
+
+    await client.query('COMMIT');
+    client.release();
+    res.status(201).json({ message: 'Pedido a proveedor creado exitosamente', pedido_id: nuevoPedidoId });
+  } catch (error) {
+    console.error('Error al crear el pedido a proveedor:', error);
+    res.status(500).json({ error: 'Error al crear el pedido a proveedor' });
+  }
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor escuchando en el puerto ${PORT}`);
+});
+
+###Ejemplo de solicitud desde el frontend
+
+import React, { useState } from 'react';
+import axios from 'axios';
+
+const CrearPedidoProveedor = () => {
+  const [proveedorId, setProveedorId] = useState('');
+  const [detalles, setDetalles] = useState([{ producto_id: '', cantidad: '', precio_unitario: '' }]);
+
+  const handleChange = (index, event) => {
+    const { name, value } = event.target;
+    const nuevosDetalles = [...detalles];
+    nuevosDetalles[index][name] = value;
+    setDetalles(nuevosDetalles);
+  };
+
+  const agregarDetalle = () => {
+    setDetalles([...detalles, { producto_id: '', cantidad: '', precio_unitario: '' }]);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:3000/pedidos_proveedor', {
+        proveedor_id: proveedorId,
+        detalles: detalles.map(detalle => ({
+          producto_id: parseInt(detalle.producto_id),
+          cantidad: parseInt(detalle.cantidad),
+          precio_unitario: parseFloat(detalle.precio_unitario)
+        }))
+      });
+      console.log('Pedido a proveedor creado:', response.data);
+    } catch (error) {
+      console.error('Error al crear el pedido a proveedor:', error);
+    }
+  };
+
+  return (
+    <div>
+      <h1>Crear Pedido a Proveedor</h1>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Proveedor ID:</label>
+          <input
+            type="text"
+            value={proveedorId}
+            onChange={(e) => setProveedorId(e.target.value)}
+            required
+          />
+        </div>
+        {detalles.map((detalle, index) => (
+          <div key={index}>
+            <label>Producto ID:</label>
+            <input
+              type="text"
+              name="producto_id"
+              value={detalle.producto_id}
+              onChange={(e) => handleChange(index, e)}
+              required
+            />
+            <label>Cantidad:</label>
+            <input
+              type="text"
+              name="cantidad"
+              value={detalle.cantidad}
+              onChange={(e) => handleChange(index, e)}
+              required
+            />
+            <label>Precio Unitario:</label>
+            <input
+              type="text"
+              name="precio_unitario"
+              value={detalle.precio_unitario}
+              onChange={(e) => handleChange(index, e)}
+              required
+            />
+          </div>
+        ))}
+        <button type="button" onClick={agregarDetalle}>Agregar Detalle</button>
+        <button type="submit">Crear Pedido</button>
+      </form>
+    </div>
+  );
+};
+
+export default CrearPedidoProveedor;
 
 
