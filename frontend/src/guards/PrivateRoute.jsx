@@ -3,7 +3,8 @@ import { Navigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 
 const PrivateRoute = ({ children, allowedRoles }) => {
-  const { rol: userRol } = useContext(Context);
+  const { user } = useAuth();
+  const userRol = user?.rol;
 
   if (!userRol) {
     // Si no hay rol, redirigir al login

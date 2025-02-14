@@ -3,8 +3,7 @@ const router = express.Router();
 const { obtenerUsuarioPorEmail } = require('../models/consultas');
 const {
   postLogin,
-  registrarCliente,
-  registrarPersonal,
+  registrarCliente,  
   asignarRolUsuario,
   obtenerTodosLosUsuarios,
   obtenerUsuarioPorId,
@@ -22,9 +21,9 @@ router.post("/register", verificarCredencialesMiddleware, registrarCliente);
 // Rutas privadas (requieren autenticación)
 router.get("/usuarios", validarTokenMiddleware, obtenerTodosLosUsuarios);
 router.get("/usuarios/:id", validarTokenMiddleware, obtenerUsuarioPorId);
-router.put("/usuarios/:id", validarTokenMiddleware, modificarUsuarioPorId);
+router.put("/usuarios/editar-usuario/:id", validarTokenMiddleware, modificarUsuarioPorId);
 router.delete("/usuarios/:id", validarTokenMiddleware, eliminarUsuarioPorId);
-
+router.put("/usuarios/asignar-rol/:id", validarTokenMiddleware, asignarRolUsuario);
 
 router.get('/usuario', async (req, res) => {
   const { email } = req.query;
@@ -37,7 +36,6 @@ router.get('/usuario', async (req, res) => {
 });
 
 // Rutas protegidas para el personal
-router.post("/register-personal", validarTokenMiddleware, validarRolMiddleware(['Administrador']), registrarPersonal);
-router.post("/asignar-rol", validarTokenMiddleware, validarRolMiddleware(['Administrador']), asignarRolUsuario);
+router.post("/asignar-rol", validarTokenMiddleware, validarRolMiddleware(['ADMINISTRADOR']), asignarRolUsuario);
 
 module.exports = router;

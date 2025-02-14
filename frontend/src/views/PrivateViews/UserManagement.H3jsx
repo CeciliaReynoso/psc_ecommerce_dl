@@ -51,8 +51,10 @@ const UserManagement = () => {
   };
 
   const handleEditarUsuario = (id) => {
-    // Redirigir a un formulario de edición de usuario
-    navigate(`/admin/users/edit-user/${id}`);
+    // Lógica para editar un usuario existente
+    console.log('Editar Usuario', id);
+    // Aquí puedes redirigir a un formulario de edición de usuario
+    navigate(`/editar-usuario/${id}`);
   };
 
   const handleEliminarUsuario = async (id) => {

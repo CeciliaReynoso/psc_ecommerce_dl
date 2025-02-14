@@ -11,6 +11,9 @@ export const ENDPOINT = {
   // Endpoints privados
   users: `${URLBASE}/usuarios`,
   user: `${URLBASE}/usuario`,
+  editUser: `${URLBASE}/usuarios/editar-usuario`,
+  assignRole: `${URLBASE}/usuarios/asignar-rol`,
+  editUser: `${URLBASE}/edit-user`,
   products: `${URLBASE}/productos`,
   product: `${URLBASE}/producto`,
   categories: `${URLBASE}/categorias`,

@@ -33,7 +33,7 @@ const registrarUsuario = async (email, password, nombre, direccion) => {
 
 const modificarUsuario = async (id, email, password, rol, nombre, direccion) => {
   const hashedPassword = await bcrypt.hash(password, 10);
-  const consulta = "UPDATE usuarios SET email = $1, password = $2, rol = $3, nombre = $4, direccion = $5 WHERE id = $6 RETURNING *";
+  const consulta = "UPDATE usuarios SET email = $1, password = $2, nombre = $3, direccion = $4 , rol = $5 WHERE id = $6 RETURNING *";
   const values = [email, hashedPassword, nombre, direccion, , rol, id];
   const result = await DB.query(consulta, values);
   if (result.rowCount === 0) {

@@ -46,23 +46,6 @@ export const createUser = async (user) => {
   }
 };
 
-// Crear un nuevo usuario (Registro de Personal Interno)
-export const createPersonal = async (user, token) => {
-  if (!token) {
-    throw new Error('Token no encontrado');
-  }
-  const headers = {
-    'Authorization': `Bearer ${token}`,
-  };
-  try {
-    const response = await axios.post(ENDPOINT.personal, user, { headers });
-    return response.data;
-  } catch (error) {
-    console.error('Error al crear usuario:', error);
-    throw error;
-  }
-};
-
 // Actualizar un usuario (requiere autenticación)
 export const updateUser = async (id, user, token) => {
   if (!token) {
@@ -97,16 +80,20 @@ export const deleteUser = async (id, token) => {
   }
 };
 
-// Autenticar un usuario
-export const authenticateUser = async (credentials) => {
+// Asignar rol a un usuario 
+export const assignRole = async (data, token) => {
+  if (!token) {
+    throw new Error('Token no encontrado');
+  }
+  const headers = {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json',
+  };
   try {
-    const response = await axios.post(ENDPOINT.login, credentials);
-    // Guardar el token y el email en sessionStorage
-    window.sessionStorage.setItem('token', response.data.token);
-    window.sessionStorage.setItem('email', response.data.user.email);
+    const response = await axios.put(`${ENDPOINT.users}/asignar-rol`, data, { headers });
     return response.data;
   } catch (error) {
-    console.error('Error al autenticar usuario:', error);
+    console.error('Error al asignar rol:', error);
     throw error;
   }
 };

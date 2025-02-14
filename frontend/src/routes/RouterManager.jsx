@@ -16,6 +16,7 @@ import Detail from '../views/Detail';
 import Buyer from '../views/PrivateViews/Buyer';
 import Seller from '../views/PrivateViews/Seller';
 import UserManagement from '../views/PrivateViews/UserManagement';
+import EditUserForm from '../views/PrivateViews/EditUserForm';
 import ProductManagement from '../views/PrivateViews/ProductManagement';
 import CategoryManagement from '../views/PrivateViews/CategoryManagement';
 import SupplierOrders from '../views/PrivateViews/SupplierOrders'; // Asegúrate de importar SupplierOrders
@@ -54,6 +55,7 @@ export const RouterManager = () => {
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<Admin />} />        
               <Route path="/admin/users" element={<UserManagement />} />
+              <Route path="/admin/users/edit-user/:id" element={<EditUserForm />} />
               <Route path="/admin/products" element={< PrivateRoute allowedRoles={[ROLES.ADMIN]}><ProductManagement /></PrivateRoute>} />
               <Route path="/admin/categories" element={< PrivateRoute allowedRoles={[ROLES.ADMIN]}><CategoryManagement /></PrivateRoute>} />
             </Route>

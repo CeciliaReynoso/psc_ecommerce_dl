@@ -11,6 +11,7 @@ const HomePerfil = () => {
     const userRol = localStorage.getItem('userRol');
     const userEmail = localStorage.getItem('userEmail');
     const userDireccion = localStorage.getItem('userDireccion');
+    
  
     setCargo({ nombre: userNombre, rol: userRol, email: userEmail, direccion: userDireccion });
     
@@ -26,6 +27,7 @@ const HomePerfil = () => {
         <p>Nombre: {cargo?.nombre}</p>
         <p>Rol: {cargo?.rol}</p>
         <p>Dirección: {cargo?.direccion}</p>
+        <p>Email: {cargo?.email}</p>
       <footer>
         <p>© 2025 PetsCare. Todos los derechos reservados.</p>
       </footer>
