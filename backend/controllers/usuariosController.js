@@ -89,9 +89,9 @@ const obtenerUsuarioPorIdController = async (req, res) => {
 
 const modificarUsuarioPorId = async (req, res) => {
   const { id } = req.params;
-  const { email, password, rol, nombre, direccion } = req.body;
+  const { nombre, direccion, rol } = req.body;
   try {
-    const usuarioModificado = await modificarUsuario(id, email, password, rol, nombre, direccion);
+    const usuarioModificado = await modificarUsuario(id, nombre, direccion, rol);
     res.status(200).json(usuarioModificado);
   } catch (error) {
     res.status(500).json({ error: error.message });

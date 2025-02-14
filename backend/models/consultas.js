@@ -31,10 +31,9 @@ const registrarUsuario = async (email, password, nombre, direccion) => {
   return result.rows[0];
 };
 
-const modificarUsuario = async (id, email, password, rol, nombre, direccion) => {
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const consulta = "UPDATE usuarios SET email = $1, password = $2, nombre = $3, direccion = $4 , rol = $5 WHERE id = $6 RETURNING *";
-  const values = [email, hashedPassword, nombre, direccion, , rol, id];
+const modificarUsuario = async (id,nombre, direccion, rol) => {
+  const consulta = "UPDATE usuarios SET nombre = $1, direccion = $2, rol = $3 WHERE id = $4 RETURNING *";
+  const values = [nombre, direccion, rol, id];
   const result = await DB.query(consulta, values);
   if (result.rowCount === 0) {
     throw { code: 404, message: "No se consiguió ningún usuario con este id" };

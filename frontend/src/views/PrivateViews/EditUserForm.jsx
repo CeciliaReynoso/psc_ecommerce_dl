@@ -5,46 +5,71 @@ import { ENDPOINT } from '../../config/constans';
 import useAuth from '../../hooks/useAuth';
 
 const EditUserForm = () => {
-  const { token } = useAuth();
+  const { token, user } = useAuth(); // Obtener el token y el usuario logueado (administrador)
   const { id } = useParams();
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
-  const [nombre, setNombre] = useState('');
-  const [direccion, setDireccion] = useState('');
-  const [rol, setRol] = useState('');
+  const [userData, setUserData] = useState({
+    nombre: '',
+    direccion: '',
+    rol: '',
+    email: ''
+  });
 
   useEffect(() => {
+    if (!user) {
+      return;
+    }
+
+    if (user.rol !== 'ADMINISTRADOR') {
+      navigate('/no-autorizado');
+      return;
+    }
+
     const fetchUser = async () => {
       try {
         const response = await axios.get(`${ENDPOINT.users}/${id}`, {
-          headers: { Authorization: `Bearer ${token}` }
+          headers: { Authorization: `Bearer ${token}` } // Usar el token del administrador
         });
-        const userData = response.data;
-        setUser(userData);
-        setNombre(userData.nombre);
-        setDireccion(userData.direccion);
-        setRol(userData.rol);
+        const data = response.data;
+        setUserData({
+          nombre: data.nombre,
+          direccion: data.direccion,
+          rol: data.rol,
+          email: data.email
+        });
       } catch (error) {
         console.error('Error al obtener el usuario:', error);
       }
     };
 
     fetchUser();
-  }, [id, token]);
+  }, [id, token, user, navigate]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserData((prevData) => ({
+      ...prevData,
+      [name]: value
+    }));
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.put(`${ENDPOINT.editUser}/${id}`, { nombre, direccion, rol }, {
-        headers: { Authorization: `Bearer ${token}` }
+      await axios.put(`${ENDPOINT.users}/${id}`, {
+        nombre: userData.nombre,
+        direccion: userData.direccion,
+        rol: userData.rol
+      }, {
+        headers: { Authorization: `Bearer ${token}` } // Usar el token del administrador
       });
-      navigate('/user-management');
+      navigate('/admin/users');
     } catch (error) {
       console.error('Error al actualizar el usuario:', error);
     }
   };
 
-  if (!user) {
+  if (!userData.nombre) {
     return <p>Cargando usuario...</p>;
   }
 
@@ -53,19 +78,31 @@ const EditUserForm = () => {
       <h2>Editar Usuario</h2>
       <form onSubmit={handleSubmit}>
         <label>Email</label>
-        <input type="text" value={user.email} readOnly />
-
-        <label>Password</label>
-        <input type="text" value="********" readOnly />
+        <p>{userData.email}</p>
 
         <label>Nombre</label>
-        <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} />
+        <input
+          type="text"
+          name="nombre"
+          value={userData.nombre}
+          onChange={handleChange}
+        />
 
         <label>Dirección</label>
-        <input type="text" value={direccion} onChange={(e) => setDireccion(e.target.value)} />
+        <input
+          type="text"
+          name="direccion"
+          value={userData.direccion}
+          onChange={handleChange}
+        />
 
-        <label>Rol</label>
-        <select value={rol} onChange={(e) => setRol(e.target.value)}>
+        <label>Asignar Nuevo Rol</label>
+        <select
+          name="rol"
+          value={userData.rol}
+          onChange={handleChange}
+        >
+          <option value="CLIENTE">CLIENTE</option>
           <option value="ADMINISTRADOR">ADMINISTRADOR</option>
           <option value="COMPRADOR">COMPRADOR</option>
           <option value="VENDEDOR">VENDEDOR</option>
