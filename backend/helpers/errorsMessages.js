@@ -1,6 +1,6 @@
 module.exports = {
     TRIP_NOT_FOUND: {
-        id: 'itemNoEncontrad',
+        id: 'itemNoEncontrado',
         statusCode: 404,
         message: 'Item no encontrado',
         description: 'El item con el ID asignado no existe en la base de datos',

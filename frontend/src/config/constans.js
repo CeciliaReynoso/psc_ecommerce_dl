@@ -7,6 +7,10 @@ export const ENDPOINT = {
   login: `${URLBASE}/login`,
   register: `${URLBASE}/register`,  
   cart: `${URLBASE}/cart`,
+  products: `${URLBASE}/productos`, 
+  productsFilter:`${URLBASE}/productos/filtros`,
+  product: `${URLBASE}/productos/:id`, 
+
 
   // Endpoints privados
   users: `${URLBASE}/usuarios`,
@@ -14,8 +18,6 @@ export const ENDPOINT = {
   editUserGet: `${URLBASE}/usuarios/editar-usuario`,
   editUser: `${URLBASE}/usuarios`,
   assignRole: `${URLBASE}/usuarios/asignar-rol`,
-  products: `${URLBASE}/productos`,
-  product: `${URLBASE}/producto`,
   categories: `${URLBASE}/categorias`,
   category: `${URLBASE}/categoria`,
   personal: `${URLBASE}/register-personal`,
@@ -24,7 +26,8 @@ export const ENDPOINT = {
   createPost: `${URLBASE}/admin/create-post`,
   galleryPosts: `${URLBASE}/admin/gallery-posts`,
   userManagement: `${URLBASE}/admin/users`,
-  productManagement: `${URLBASE}/admin/products`,
+  productManagement: `${URLBASE}/admin/productos`,
+  product:`${URLBASE}/admin/productos/:id`,
   categoryManagement: `${URLBASE}/admin,categories`,
   buyerManagement: `${URLBASE}/buyer`,
   sellerManagement: `${URLBASE}/seller`,

@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 const ProductManagement = () => {
   const { token, user } = useAuth();
   const navigate = useNavigate();
-  const [usuarios, setUsuarios] = useState([]);
+  const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -22,7 +22,7 @@ const ProductManagement = () => {
       return;
     }
 
-    const fetchUsuarios = async () => {
+    const fetchProductos = async () => {
       try {
         if (token) {
           const response = await axios.get(ENDPOINT.users, {

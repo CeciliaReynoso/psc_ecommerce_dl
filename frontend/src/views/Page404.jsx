@@ -5,7 +5,7 @@ const Page404 = () => {
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
       <h1>404 - Página No Encontrada</h1>
-      <p>Lo sentimos, la página que estás buscando no existe.</p>
+      <p>Lo sentimos, la página que estás buscando está reservada para otro tipo de usuario.</p>
       <Link to="/">Volver a la Página Principal</Link>
     </div>
   );

@@ -50,6 +50,12 @@ CREATE TABLE subcategorias (
     nombre VARCHAR(255) NOT NULL,
     descripcion TEXT
 );
+INSERT INTO subcategorias (
+    id_categoria, nombre, descripcion
+) VALUES
+(1, 'Movimiento y Ortopedia', 'Productos relacionados con el movimiento y la ortopedia para mascotas.'),
+(2, 'Pasatiempo', 'Productos de entretenimiento y pasatiempos para mascotas.'),
+(3, 'Articulaciones', 'Productos para el cuidado de las articulaciones de las mascotas.');
 
 DROP TABLE IF EXISTS productos;
 CREATE TABLE productos (
@@ -69,25 +75,17 @@ CREATE TABLE productos (
 );
 
 INSERT INTO productos (
-    nombre, descripcion, precio_venta, precio_costo, categoria_id, subcategoria_id, 
+    id_producto, nombre, descripcion, precio_venta, precio_costo, categoria_id, subcategoria_id, 
     stock_actual, stock_minimo, proveedor_id, fecha_creacion, fecha_actualizacion, imagen_url
 ) VALUES
-(
-    'Collar Ortopédico', 'Collar ortopédico ajustable para perros.', 29.99, 15.00, 1, 1, 
-    50, 10, 1, '2025-02-14 00:00:00', '2025-02-14 00:00:00', 'https://m.media-amazon.com/images/I/714R-eY-T6L._AC_UL480_FMwebp_QL65_.jpg'
-),
-(
-    'Juguete para Gatos', 'Juguete interactivo para gatos.', 19.99, 10.00, 2, 2, 
-    100, 20, 1, '2025-02-14 00:00:00', '2025-02-14 00:00:00', 'https://m.media-amazon.com/images/I/81fSg1+32LL._AC_UL480_FMwebp_QL65_.jpg'
-),
-(
-    'Suplemento para Articulaciones', 'Suplemento para mejorar la salud de las articulaciones.', 24.99, 12.00, 1, 3, 
-    75, 15, 1, '2025-02-14 00:00:00', '2025-02-14 00:00:00', 'https://m.media-amazon.com/images/I/51ZM8wlaQCL._AC_UL480_FMwebp_QL65_.jpg'
-),
-(
-    'KTS Terapia láser para perros', 'Dispositivo portátil de terapia láser para perros. Alivio del dolor de artritis, cadera, articulaciones, cuidado de heridas y problemas en la piel', 151.99, 78.00, 1, 3, 
-    40, 8, 1, '2025-02-14 00:00:00', '2025-02-14 00:00:00', 'https://m.media-amazon.com/images/I/6151Gnb-kSL._AC_UL480_FMwebp_QL65_.jpg'
-);
+(1, 'Collar Ortopédico', 'Collar ortopédico ajustable para perros.', 29.99, 15.00, 1, 1, 
+    50, 10, 1, '2025-02-14 00:00:00', '2025-02-14 00:00:00', 'https://m.media-amazon.com/images/I/714R-eY-T6L._AC_UL480_FMwebp_QL65_.jpg'),
+(2, 'Juguete para Gatos', 'Juguete interactivo para gatos.', 19.99, 10.00, 2, 2, 
+    100, 20, 1, '2025-02-14 00:00:00', '2025-02-14 00:00:00', 'https://m.media-amazon.com/images/I/81fSg1+32LL._AC_UL480_FMwebp_QL65_.jpg'),
+(3, 'Suplemento para Articulaciones', 'Suplemento para mejorar la salud de las articulaciones.', 24.99, 12.00, 1, 3, 
+    75, 15, 1, '2025-02-14 00:00:00', '2025-02-14 00:00:00', 'https://m.media-amazon.com/images/I/51ZM8wlaQCL._AC_UL480_FMwebp_QL65_.jpg'),
+(4, 'KTS Terapia láser para perros', 'Dispositivo portátil de terapia láser para perros. Alivio del dolor de artritis, cadera, articulaciones, cuidado de heridas y problemas en la piel', 151.99, 78.00, 1, 3, 
+    40, 8, 1, '2025-02-14 00:00:00', '2025-02-14 00:00:00', 'https://m.media-amazon.com/images/I/6151Gnb-kSL._AC_UL480_FMwebp_QL65_.jpg');
 
 DROP TABLE IF EXISTS pedidos;
 CREATE TABLE pedidos (
