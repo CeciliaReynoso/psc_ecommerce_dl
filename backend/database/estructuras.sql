@@ -4,7 +4,7 @@ CREATE DATABASE petstore;
 \c petstore;
 DROP TABLE IF EXISTS usuarios;
 
-CREATE TABLE IF NOT EXITS usuarios (
+CREATE TABLE IF NOT EXISTS usuarios (
   id        SERIAL        NOT NULL,
   email     VARCHAR(50)   NOT NULL  UNIQUE,
   password  VARCHAR(60)   NOT NULL,  
@@ -27,11 +27,11 @@ INSERT INTO proveedores (
 ) VALUES
 (1, 'Proveedor A', 'Juan Pérez', '123 Calle Principal, Lima, Peru', '+51 123 456 789', 'juan.perez@proveedora.com'),
 (2, 'Proveedor B', 'María García', '456 Avenida Secundaria, Lima, Peru', '+51 987 654 321', 'maria.garcia@proveedorb.com'),
-(3, 'Proveedor C', 'Carlos López', '789 Boulevard Central, Lima, Peru', '+51 456 789 123', 'carlos.lopez@proveedorc.com'),
+(3, 'Proveedor C', 'Carlos López', '789 Boulevard Central, Lima, Peru', '+51 456 789 123', 'carlos.lopez@proveedorc.com')
 
 DROP TABLE IF EXISTS categorias;
 
-CREATE TABLE IF NOT EXITS categorias (
+CREATE TABLE IF NOT EXISTS categorias (
     id_categoria SERIAL PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
     descripcion TEXT
@@ -52,7 +52,7 @@ CREATE TABLE subcategorias (
 );
 
 DROP TABLE IF EXISTS productos;
-CREATE TABLE IF NOT EXITS productos (
+CREATE TABLE productos (
     id_producto SERIAL PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
     descripcion TEXT,
@@ -114,7 +114,7 @@ CREATE TABLE pedidos_proveedor (
     estado VARCHAR(50) NOT NULL,
     total DECIMAL(10, 2) NOT NULL
 );
-DROP TABLE IF EXISTS detalles_pedido_proveedor
+DROP TABLE IF EXISTS detalles_pedido_proveedor;
 CREATE TABLE detalles_pedido_proveedor (
     id_detalle_proveedor SERIAL PRIMARY KEY,
     pedido_proveedor_id INT REFERENCES pedidos_proveedor(id_pedido_proveedor),
@@ -123,7 +123,7 @@ CREATE TABLE detalles_pedido_proveedor (
     precio_unitario DECIMAL(10, 2) NOT NULL,
     subtotal DECIMAL(10, 2) NOT NULL
 );
-DROP TABLE IF EXISTS movimientos_stock
+DROP TABLE IF EXISTS movimientos_stock;
 CREATE TABLE movimientos_stock (
     id_movimiento SERIAL PRIMARY KEY,
     producto_id INT REFERENCES productos(id_producto),
