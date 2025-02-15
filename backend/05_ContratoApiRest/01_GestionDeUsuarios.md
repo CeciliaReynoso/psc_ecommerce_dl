@@ -10,7 +10,7 @@ Descripción:
 
 ## Registro de Personal Interno
 
-. Interfaz Privada: El personal interno se registra a través de una interfaz privada accesible solo para administradores o usuarios autorizados
+. Interfaz Privada: Solo el perfil Administrador del personal interno se registra a través de una interfaz privada accesible solo para administradores. El resto de perfiles debe registrarse a través de la interfaz pública y luego el administrador le asigna un rol dentro de la empresa.
 
 . Selección de Rol: Al registrar un miembre del personal, se incluye un menú desplegable en el formulario para seleccionar el rol (empleado, administrador, comprador, vendedor)
 

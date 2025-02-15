@@ -8,7 +8,7 @@ const PrivateRoute = ({ children, allowedRoles }) => {
 
   if (!userRol) {
     // Si no hay rol, redirigir al login
-    return <Navigate to="/login" />;
+    return <Navigate to="/" />;
   }
 
   if (!allowedRoles.includes(userRol)) {

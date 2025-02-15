@@ -7,11 +7,12 @@ const SellerLayout = () => {
   return (
     <div>
       <Navigation />
-      <main className='app-container'>
-        <Seller
-          path="/seller"          
-        /> 
-        <Outlet />       
+      <main className='app-container'>  
+         <div style={{paddingLeft: '3rem'}}>  
+         <div className='className="table table-striped"'> 
+         </div>                                        
+          <Outlet />    
+          </div>   
       </main>
     </div>
   );
