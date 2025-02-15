@@ -56,17 +56,17 @@ export const RouterManager = () => {
               <Route index element={<Admin />} />        
               <Route path="/admin/users" element={<UserManagement />} />
               <Route path="/admin/users/edit-user/:id" element={<EditUserForm />} />
-              <Route path="/admin/products" element={<ProductManagement />} />
-              <Route path="/admin/categories" element={<CategoryManagement />} />
+              <Route path="/admin/products" element={< PrivateRoute allowedRoles={[ROLES.ADMIN]}><ProductManagement /></PrivateRoute>} />
+              <Route path="/admin/categories" element={< PrivateRoute allowedRoles={[ROLES.ADMIN]}><CategoryManagement /></PrivateRoute>} />
             </Route>
 
-            <Route path="/buyer" element={<BuyerLayout />}>
+            <Route path="/buyer" element={<AuthGuard allowedRoles={[ROLES.COMPRADOR]}><BuyerLayout /></AuthGuard>}>
               <Route index element={<Buyer />} />
               <Route path="/buyer/orders" element={<SupplierOrders />} />
               <Route path="/buyer/low-stock-products" element={<LowStockProducts />} />
             </Route>
 
-            <Route path="/seller" element={<SellerLayout />}>
+            <Route path="/seller" element={<AuthGuard allowedRoles={[ROLES.VENDEDOR]}><SellerLayout /></AuthGuard>}>
               <Route index element={<Seller />} />
               <Route path="/seller/orders" element={<CustomerOrders />} />
               <Route path="/seller/incomplete-orders" element={<IncompleteOrders />} />

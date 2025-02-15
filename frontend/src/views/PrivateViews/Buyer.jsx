@@ -1,8 +1,21 @@
-import React from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import RolesContext from '../../context/RolesContext';
+import useAuth from '../../hooks/useAuth';
 
 const Buyer = () => {
+  const { setCargo } = useContext(RolesContext);
+  const { user } = useAuth();
   const navigate = useNavigate();
+  
+  useEffect(() => {
+    const userNombre = localStorage.getItem('userNombre');
+    const userRol = localStorage.getItem('userRol');
+
+    if (userNombre && userRol) {
+      setCargo({ nombre: userNombre, rol: userRol });
+    }
+  }, [setCargo]);
 
   return (
     <div className="buyer-container">
