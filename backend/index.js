@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const { manejarErroresMiddleware } = require("./middlewares/middlewares");
 const usuariosRoutes = require('./routes/usuariosRoutes');
+const productosRoutes = require('./routes/productosRoutes');
 
 const app = express();
 
@@ -9,6 +10,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/", usuariosRoutes);
+app.use("/", productosRoutes);
 
 // Middleware de manejo de errores
 app.use(manejarErroresMiddleware);
