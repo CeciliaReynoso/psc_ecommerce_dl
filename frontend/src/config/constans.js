@@ -1,5 +1,3 @@
-import UserManagement from "../views/PrivateViews/UserManagement";
-
 export const URLBASE = 'http://localhost:3000';
 
 export const ENDPOINT = {
@@ -10,7 +8,6 @@ export const ENDPOINT = {
   products: `${URLBASE}/productos`, 
   productsFilter:`${URLBASE}/productos/filtros`,
   product: `${URLBASE}/productos/:id`, 
-
 
   // Endpoints privados
   users: `${URLBASE}/usuarios`,
@@ -23,7 +20,10 @@ export const ENDPOINT = {
   orders: `${URLBASE}/pedidos_proveedor/:id/validar`,  
   supplierOrders: `${URLBASE}/pedidos_proveedor`,
   lowStockProducts: `${URLBASE}/buyer/low-stock-products`,
-  
+  proveedores: `${URLBASE}/proveedores`,
+  proveedor: `${URLBASE}/proveedores/:id`,
+  subcategorias: `${URLBASE}/subcategorias`,
+  subcategoria: `${URLBASE}/subcategorias/:id`,
 
   // Agregar los nuevos endpoints necesarios
   createPost: `${URLBASE}/admin/create-post`,
@@ -31,7 +31,7 @@ export const ENDPOINT = {
   userManagement: `${URLBASE}/admin/users`,
   productManagement: `${URLBASE}/admin/productos`,
   product:`${URLBASE}/admin/productos/:id`,
-  categoryManagement: `${URLBASE}/admin,categories`,
+  categoryManagement: `${URLBASE}/admin/categories`,
   buyerManagement: `${URLBASE}/buyer`,
   sellerManagement: `${URLBASE}/seller`,
   customerOrders: `${URLBASE}/seller/orders`,

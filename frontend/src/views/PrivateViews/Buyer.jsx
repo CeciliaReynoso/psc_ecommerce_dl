@@ -23,6 +23,8 @@ const Buyer = () => {
       <div className="opciones">
         <button onClick={() => navigate('/buyer/orders')} className="btn">Lista de pedidos a proveedor</button>
         <button onClick={() => navigate('/buyer/low-stock-products')} className="btn">Productos con bajo stock</button>
+        <button onClick={() => navigate('/buyer/proveedores')} className="btn">Gestionar Proveedores</button>
+        <button onClick={() => navigate('/buyer/subcategorias')} className="btn">Gestionar Subcategorías</button>
       </div>
     </div>
   );
