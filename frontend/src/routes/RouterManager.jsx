@@ -30,6 +30,8 @@ import SellerLayout from '../layouts/SellerLayout';
 import { ROLES } from '../helpers/roles';
 import { RolesProvider } from '../context/RolesContext';
 import useAuth from '../hooks/useAuth';
+import Proveedores from '../views/PrivateViews/Proveedores';
+import Subcategorias from '../views/PrivateViews/Subcategorias';
 
 export const RouterManager = () => {
   const { user } = useAuth();
@@ -64,6 +66,8 @@ export const RouterManager = () => {
               <Route index element={<Buyer />} />
               <Route path="/buyer/orders" element={<SupplierOrders />} />
               <Route path="/buyer/low-stock-products" element={<LowStockProducts />} />
+              <Route path="/buyer/proveedores" element={<Proveedores />} />
+              <Route path="/buyer/subcategorias" element={<Subcategorias />} />
             </Route>
 
             <Route path="/seller" element={<SellerLayout />}>
