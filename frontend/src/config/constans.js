@@ -20,7 +20,10 @@ export const ENDPOINT = {
   assignRole: `${URLBASE}/usuarios/asignar-rol`,
   categories: `${URLBASE}/categorias`,
   category: `${URLBASE}/categoria`,
-  personal: `${URLBASE}/register-personal`,
+  orders: `${URLBASE}/pedidos_proveedor/:id/validar`,  
+  supplierOrders: `${URLBASE}/pedidos_proveedor`,
+  lowStockProducts: `${URLBASE}/buyer/low-stock-products`,
+  
 
   // Agregar los nuevos endpoints necesarios
   createPost: `${URLBASE}/admin/create-post`,
@@ -31,8 +34,6 @@ export const ENDPOINT = {
   categoryManagement: `${URLBASE}/admin,categories`,
   buyerManagement: `${URLBASE}/buyer`,
   sellerManagement: `${URLBASE}/seller`,
-  supplierOrders: `${URLBASE}/buyer/orders`,
-  lowStockProducts: `${URLBASE}/buyer/low-stock-products`,
   customerOrders: `${URLBASE}/seller/orders`,
   incompleteOrders: `${URLBASE}/seller/incomplete-orders`,
 };

@@ -46,7 +46,8 @@ const SupplierOrders = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(`${ENDPOINT}/pedidos_proveedor`, {
+      console.log('Enviando solicitud para crear pedido:', { proveedor_id: proveedorId, productos });
+      const response = await axios.post(ENDPOINT.supplierOrders, {
         proveedor_id: proveedorId,
         productos,
       }, {
@@ -54,30 +55,34 @@ const SupplierOrders = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log('Respuesta del servidor:', response.data);
       setPedidos([...pedidos, response.data]);
       setProveedorId('');
       setProductos([{ producto_id: '', cantidad: '', precio_unitario: '' }]);
     } catch (error) {
+      console.error('Error al crear pedido:', error.response.data.message);
       setError(error.response.data.message);
     }
   };
 
   const fetchPedidos = async () => {
     try {
-      const response = await axios.get(`${ENDPOINT}/pedidos_proveedor`, {
+      const response = await axios.get(ENDPOINT.supplierOrders, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log('Pedidos obtenidos del servidor:', response.data);
       setPedidos(response.data);
     } catch (error) {
+      console.error('Error al obtener pedidos:', error.response.data.message);
       setError(error.response.data.message);
     }
   };
 
   const validarRecepcionPedido = async (id_pedido_proveedor) => {
     try {
-      await axios.put(`${ENDPOINT}/pedidos_proveedor/${id_pedido_proveedor}/validar`, {
+      await axios.put(`${ENDPOINT.orders.replace(':id', id_pedido_proveedor)}`, {
         estado: 'recibido',
         usuario_id: user.id,
       }, {
@@ -87,19 +92,21 @@ const SupplierOrders = () => {
       });
       fetchPedidos();
     } catch (error) {
+      console.error('Error al validar recepción del pedido:', error.response.data.message);
       setError(error.response.data.message);
     }
   };
 
   const eliminarPedido = async (id_pedido_proveedor) => {
     try {
-      await axios.delete(`${ENDPOINT}/pedidos_proveedor/${id_pedido_proveedor}`, {
+      await axios.delete(`${ENDPOINT.supplierOrders}/${id_pedido_proveedor}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       fetchPedidos();
     } catch (error) {
+      console.error('Error al eliminar pedido:', error.response.data.message);
       setError(error.response.data.message);
     }
   };
