@@ -125,7 +125,28 @@ PedidoProveedor:
         cantidad: 30
         precio_unitario: 15.00
         subtotal: 450.00
+### Tablas y relaciones entre tablas utilizadas
 
+Resumen de las tablas y relaciones que se utilizan:
+
+1. **Tabla `productos`**:
+   - Relacionada con `categorias` a través de `categoria_id`.
+   - Relacionada con `subcategorias` a través de `subcategoria_id`.
+   - Relacionada con `proveedores` a través de `proveedor_id`.
+
+2. **Tabla `pedidos_proveedor`**:
+   - Relacionada con `proveedores` a través de `proveedor_id`.
+
+3. **Tabla `detalles_pedido_proveedor`**:
+   - Relacionada con `pedidos_proveedor` a través de `pedido_proveedor_id`.
+   - Relacionada con `productos` a través de `producto_id`.
+
+4. **Tabla `movimientos_stock`**:
+   - Relacionada con `productos` a través de `producto_id`.
+
+Estas relaciones aseguran que los endpoints y las vistas que hemos implementado funcionen correctamente con la estructura de la base de datos definida en estructuras.sql.
+
+Si tienes alguna otra pregunta o necesitas más ayuda, no dudes en decírmelo.
 ### Endpoints
 
 #### Obtener la lista de productos

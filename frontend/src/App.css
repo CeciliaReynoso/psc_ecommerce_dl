@@ -147,6 +147,18 @@ a {
   cursor: pointer;
 }
 
+.buyer-container .opciones{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: start;
+  padding: 20px;
+  background: var(--color-secondary);
+  color: var(--color-text);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+
 .cart-container {
   display: flex;
   justify-content: center;
