@@ -10,7 +10,7 @@ const SupplierOrders = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [pedidos, setPedidos] = useState([]);
+  const [detallesPedidos, setDetallesPedidos] = useState([]);
   const [proveedorId, setProveedorId] = useState('');
   const [productos, setProductos] = useState([{ producto_id: '', cantidad: '', precio_unitario: '' }]);
 
@@ -56,7 +56,7 @@ const SupplierOrders = () => {
         },
       });
       console.log('Respuesta del servidor:', response.data);
-      setPedidos([...pedidos, response.data]);
+      fetchDetallesPedidos();
       setProveedorId('');
       setProductos([{ producto_id: '', cantidad: '', precio_unitario: '' }]);
     } catch (error) {
@@ -65,24 +65,24 @@ const SupplierOrders = () => {
     }
   };
 
-  const fetchPedidos = async () => {
+  const fetchDetallesPedidos = async () => {
     try {
       const response = await axios.get(ENDPOINT.supplierOrders, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log('Pedidos obtenidos del servidor:', response.data);
-      setPedidos(response.data);
+      console.log('Detalles de pedidos obtenidos del servidor:', response.data);
+      setDetallesPedidos(response.data);
     } catch (error) {
-      console.error('Error al obtener pedidos:', error.response.data.message);
+      console.error('Error al obtener detalles de pedidos:', error.response.data.message);
       setError(error.response.data.message);
     }
   };
 
-  const validarRecepcionPedido = async (id_pedido_proveedor) => {
+  const validarRecepcionPedido = async (id_detalle_proveedor) => {
     try {
-      await axios.put(`${ENDPOINT.orders.replace(':id', id_pedido_proveedor)}`, {
+      await axios.put(`${ENDPOINT.orders.replace(':id', id_detalle_proveedor)}`, {
         estado: 'recibido',
         usuario_id: user.id,
       }, {
@@ -90,21 +90,21 @@ const SupplierOrders = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      fetchPedidos();
+      fetchDetallesPedidos();
     } catch (error) {
       console.error('Error al validar recepción del pedido:', error.response.data.message);
       setError(error.response.data.message);
     }
   };
 
-  const eliminarPedido = async (id_pedido_proveedor) => {
+  const eliminarPedido = async (id_detalle_proveedor) => {
     try {
-      await axios.delete(`${ENDPOINT.supplierOrders}/${id_pedido_proveedor}`, {
+      await axios.delete(`${ENDPOINT.supplierOrders}/${id_detalle_proveedor}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      fetchPedidos();
+      fetchDetallesPedidos();
     } catch (error) {
       console.error('Error al eliminar pedido:', error.response.data.message);
       setError(error.response.data.message);
@@ -112,7 +112,7 @@ const SupplierOrders = () => {
   };
 
   useEffect(() => {
-    fetchPedidos();
+    fetchDetallesPedidos();
   }, [token]);
 
   if (loading) {
@@ -172,29 +172,43 @@ const SupplierOrders = () => {
       </div>
       <div>
         <h2>Lista de Pedidos a Proveedor</h2>
-        {pedidos.length === 0 ? (
+        {detallesPedidos.length === 0 ? (
           <p>No hay pedidos a proveedores.</p>
         ) : (
           <table className="table">
             <thead>
               <tr>
+                <th>ID del Detalle</th>
                 <th>ID del Pedido</th>
+                <th>ID del Producto</th>
+                <th>Nombre del Producto</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Subtotal</th>
                 <th>ID del Proveedor</th>
+                <th>Fecha del Pedido</th>
                 <th>Estado</th>
                 <th>Total</th>
                 <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
-              {pedidos.map((pedido) => (
-                <tr key={pedido.id_pedido_proveedor}>
-                  <td>{pedido.id_pedido_proveedor}</td>
-                  <td>{pedido.proveedor_id}</td>
-                  <td>{pedido.estado}</td>
-                  <td>{pedido.total}</td>
+              {detallesPedidos.map((detalle) => (
+                <tr key={detalle.id_detalle_proveedor}>
+                  <td>{detalle.id_detalle_proveedor}</td>
+                  <td>{detalle.pedido_proveedor_id}</td>
+                  <td>{detalle.producto_id}</td>
+                  <td>{detalle.producto_nombre}</td>
+                  <td>{detalle.cantidad}</td>
+                  <td>{detalle.precio_unitario}</td>
+                  <td>{detalle.subtotal}</td>
+                  <td>{detalle.proveedor_id}</td>
+                  <td>{detalle.fecha_pedido}</td>
+                  <td>{detalle.estado}</td>
+                  <td>{detalle.total}</td>
                   <td>
-                    <button onClick={() => validarRecepcionPedido(pedido.id_pedido_proveedor)}>Validar Recepción</button>
-                    <button onClick={() => eliminarPedido(pedido.id_pedido_proveedor)}>Eliminar Pedido</button>
+                    <button onClick={() => validarRecepcionPedido(detalle.id_detalle_proveedor)}>Validar Recepción</button>
+                    <button onClick={() => eliminarPedido(detalle.id_detalle_proveedor)}>Eliminar Pedido</button>
                   </td>
                 </tr>
               ))}

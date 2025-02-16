@@ -1,4 +1,4 @@
-const { crearPedidoProveedor, validarRecepcionPedido } = require('../models/productosModel');
+const { crearPedidoProveedor, validarRecepcionPedido, obtenerDetallesPedidosProveedor } = require('../models/productosModel');
 
 const crearPedido = async (req, res) => {
   const { proveedor_id, productos } = req.body;
@@ -23,7 +23,18 @@ const validarRecepcion = async (req, res) => {
   }
 };
 
+const obtenerDetallesPedidos = async (req, res) => {
+  try {
+    const detallesPedidos = await obtenerDetallesPedidosProveedor();
+    res.status(200).json(detallesPedidos);
+  } catch (error) {
+    console.error('Error al obtener los detalles de los pedidos a proveedor:', error);
+    res.status(500).json({ error: 'Error al obtener los detalles de los pedidos a proveedor' });
+  }
+};
+
 module.exports = {
   crearPedido,
   validarRecepcion,
+  obtenerDetallesPedidos,
 };
