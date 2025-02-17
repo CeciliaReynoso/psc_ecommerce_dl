@@ -5,10 +5,10 @@ const obtenerSubcategorias = async () => {
   return rows;
 };
 
-const crearSubcategoria = async ({ nombre, descripcion, categoria_id }) => {
+const crearSubcategoria = async ({ nombre, descripcion }) => {
   const { rows } = await DB.query(
-    'INSERT INTO subcategorias (nombre, descripcion, id_categoria) VALUES ($1, $2, $3) RETURNING *',
-    [nombre, descripcion, categoria_id]
+    'INSERT INTO subcategorias (nombre, descripcion) VALUES ($1, $2) RETURNING *',
+    [nombre, descripcion]
   );
   return rows[0];
 };

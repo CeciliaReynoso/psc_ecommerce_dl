@@ -10,9 +10,11 @@ const Subcategorias = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [subcategorias, setSubcategorias] = useState([]);
-  const [nombre, setNombre] = useState('');
-  const [descripcion, setDescripcion] = useState('');
-  const [categoriaId, setCategoriaId] = useState('');
+  const [formData, setFormData] = useState({
+    nombre: '',
+    descripcion: '',
+    categoria_id: ''
+  });
   const [error, setError] = useState(null);
   const [editMode, setEditMode] = useState(false);
   const [editId, setEditId] = useState(null);
@@ -49,15 +51,19 @@ const Subcategorias = () => {
     }
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value
+    }));
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       if (editMode) {
-        await axios.put(`${ENDPOINT.subcategorias}/${editId}`, {
-          nombre,
-          descripcion,
-          categoria_id: categoriaId,
-        }, {
+        await axios.put(`${ENDPOINT.subcategorias}/${editId}`, formData, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -65,20 +71,18 @@ const Subcategorias = () => {
         setEditMode(false);
         setEditId(null);
       } else {
-        await axios.post(`${ENDPOINT.subcategorias}`, {
-          nombre,
-          descripcion,
-          categoria_id: categoriaId,
-        }, {
+        await axios.post(`${ENDPOINT.subcategorias}`, formData, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
       }
       fetchSubcategorias();
-      setNombre('');
-      setDescripcion('');
-      setCategoriaId('');
+      setFormData({
+        nombre: '',
+        descripcion: '',
+        categoria_id: ''
+      });
     } catch (error) {
       setError(error.response.data.message);
     }
@@ -87,9 +91,11 @@ const Subcategorias = () => {
   const handleEdit = (subcategoria) => {
     setEditMode(true);
     setEditId(subcategoria.id_subcategoria);
-    setNombre(subcategoria.nombre);
-    setDescripcion(subcategoria.descripcion);
-    setCategoriaId(subcategoria.id_categoria);
+    setFormData({
+      nombre: subcategoria.nombre,
+      descripcion: subcategoria.descripcion,
+      categoria_id: subcategoria.id_categoria
+    });
   };
 
   const handleDelete = async (id_subcategoria) => {
@@ -109,46 +115,38 @@ const Subcategorias = () => {
     <div className="admin-container">
       <h1>Gestionar Subcategorías</h1>
       {error && <p className="error">{error}</p>}
-      <form onSubmit={handleSubmit} className="form">
+      <button onClick={() => navigate('/admin/subcategorias/nueva')} className="btn btn-primary">Agregar Nueva Subcategoría</button>
+      <div className="form-container">
+      <form onSubmit={handleSubmit} className="form-box">
         <label htmlFor="nombre">Nombre</label>
         <input
           type="text"
           id="nombre"
-          value={nombre}
-          onChange={(e) => setNombre(e.target.value)}
+          name="nombre"
+          value={formData.nombre}
+          onChange={handleChange}
           required
           className="input-wide"
-          title={nombre}
         />
         <label htmlFor="descripcion">Descripción</label>
         <input
           type="text"
           id="descripcion"
-          value={descripcion}
-          onChange={(e) => setDescripcion(e.target.value)}
+          name="descripcion"
+          value={formData.descripcion}
+          onChange={handleChange}
           required
           className="input-wide"
-          title={descripcion}
         />
-        <label htmlFor="categoriaId">ID de Categoría</label>
-        <input
-          type="text"
-          id="categoriaId"
-          value={categoriaId}
-          onChange={(e) => setCategoriaId(e.target.value)}
-          required
-          className="input-wide"
-          title={categoriaId}
-        />
-        <button type="submit" className="btn btn-primary">{editMode ? 'Actualizar Subcategoría' : 'Agregar Subcategoría'}</button>
+        <button type="submit" className="btn btn-primary">{'Actualizar Subcategoría'}</button>
       </form>
+      </div>
       <table className="table table-striped">
         <thead>
           <tr>
             <th>ID</th>
             <th>Nombre</th>
             <th>Descripción</th>
-            <th>ID de Categoría</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -158,7 +156,6 @@ const Subcategorias = () => {
               <td>{subcategoria.id_subcategoria}</td>
               <td>{subcategoria.nombre}</td>
               <td>{subcategoria.descripcion}</td>
-              <td>{subcategoria.id_categoria}</td>
               <td>
                 <button onClick={() => handleEdit(subcategoria)} className="btn btn-secondary">Editar</button>
                 <button onClick={() => handleDelete(subcategoria.id_subcategoria)} className="btn btn-danger">Eliminar</button>

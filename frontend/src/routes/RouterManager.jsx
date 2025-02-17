@@ -31,6 +31,7 @@ import useAuth from '../hooks/useAuth';
 import Proveedores from '../views/PrivateViews/Proveedores';
 import Subcategorias from '../views/PrivateViews/Subcategorias';
 import NuevoProveedor from '../views/PrivateViews/NuevoProveedor';
+import NuevaSubcategoria from '../views/PrivateViews/NuevaSubcategoria';
 
 export const RouterManager = () => {
   const { user } = useAuth();
@@ -61,6 +62,7 @@ export const RouterManager = () => {
               <Route path="/admin/categories" element={<CategoryManagement />} />
               <Route path="/admin/proveedores" element={<Proveedores />} />
               <Route path="/admin/proveedores/nuevo" element={<NuevoProveedor />} />
+              <Route path="/admin/subcategorias/nueva" element={<NuevaSubcategoria />} />
               <Route path="/admin/subcategorias" element={<Subcategorias />} />
             </Route>
 
@@ -70,6 +72,7 @@ export const RouterManager = () => {
               <Route path="/buyer/low-stock-products" element={<LowStockProducts />} />
               <Route path="/buyer/proveedores" element={<Proveedores />} />
               <Route path="/buyer/proveedores/nuevo" element={<NuevoProveedor />} />
+              <Route path="/buyer/subcategorias/nueva" element={<NuevaSubcategoria />} />
               <Route path="/buyer/subcategorias" element={<Subcategorias />} />
             </Route>
 
