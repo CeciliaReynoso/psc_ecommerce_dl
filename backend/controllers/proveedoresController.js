@@ -1,48 +1,41 @@
-const { obtenerProveedores, crearProveedor, eliminarProveedor, actualizarProveedor } = require('../models/proveedoresModel');
+const Proveedor = require('../models/proveedoresModel');
 
-const obtenerProveedores = async (req, res) => {
+exports.getProveedores = async (req, res) => {
   try {
-    const proveedores = await obtenerProveedores();
-    res.status(200).json(proveedores);
+    const proveedores = await Proveedor.obtenerProveedores();
+    res.json(proveedores);
   } catch (error) {
-    res.status(500).json({ error: 'Error al obtener los proveedores' });
+    res.status(500).json({ message: 'Error al obtener los proveedores', error });
   }
 };
 
-const crearProveedor = async (req, res) => {
-  const { nombre, contacto, direccion, telefono, email } = req.body;
+exports.createProveedor = async (req, res) => {
   try {
-    await crearProveedor({ nombre, contacto, direccion, telefono, email });
-    res.status(201).json({ message: 'Proveedor creado exitosamente' });
+    const { nombre, contacto, direccion, telefono, email } = req.body;
+    const nuevoProveedor = await Proveedor.crearProveedor(nombre, contacto, direccion, telefono, email);
+    res.status(201).json(nuevoProveedor);
   } catch (error) {
-    res.status(500).json({ error: 'Error al crear el proveedor' });
+    res.status(500).json({ message: 'Error al crear el proveedor', error });
   }
 };
 
-const eliminarProveedor = async (req, res) => {
-  const { id } = req.params;
+exports.updateProveedor = async (req, res) => {
   try {
-    await eliminarProveedor(id);
-    res.status(200).json({ message: 'Proveedor eliminado exitosamente' });
+    const { id } = req.params;
+    const { nombre, contacto, direccion, telefono, email } = req.body;
+    const proveedorActualizado = await Proveedor.actualizarProveedor(id, nombre, contacto, direccion, telefono, email);
+    res.json(proveedorActualizado);
   } catch (error) {
-    res.status(500).json({ error: 'Error al eliminar el proveedor' });
+    res.status(500).json({ message: 'Error al actualizar el proveedor', error });
   }
 };
 
-const actualizarProveedor = async (req, res) => {
-  const { id } = req.params;
-  const { nombre, contacto, direccion, telefono, email } = req.body;
+exports.deleteProveedor = async (req, res) => {
   try {
-    await actualizarProveedor(id, { nombre, contacto, direccion, telefono, email });
-    res.status(200).json({ message: 'Proveedor actualizado exitosamente' });
+    const { id } = req.params;
+    await Proveedor.eliminarProveedor(id);
+    res.json({ message: 'Proveedor eliminado' });
   } catch (error) {
-    res.status(500).json({ error: 'Error al actualizar el proveedor' });
+    res.status(500).json({ message: 'Error al eliminar el proveedor', error });
   }
-};
-
-module.exports = {
-  obtenerProveedores,
-  crearProveedor,
-  eliminarProveedor,
-  actualizarProveedor,
 };

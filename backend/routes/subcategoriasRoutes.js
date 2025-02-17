@@ -1,10 +1,10 @@
 const express = require('express');
-const { obtenerSubcategorias, crearSubcategoria, eliminarSubcategoria } = require('../controllers/subcategoriasController');
+const {getSubcategorias, createSubcategoria, deleteSubcategoria } = require('../controllers/subcategoriasController');
 const { validarTokenMiddleware } = require('../middlewares/middlewares');
 const router = express.Router();
 
-router.get('/subcategorias', validarTokenMiddleware, obtenerSubcategorias);
-router.post('/subcategorias', validarTokenMiddleware, crearSubcategoria);
-router.delete('/subcategorias/:id', validarTokenMiddleware, eliminarSubcategoria);
+router.get('/subcategorias', validarTokenMiddleware, getSubcategorias);
+router.post('/subcategorias', validarTokenMiddleware, createSubcategoria);
+router.delete('/subcategorias/:id', validarTokenMiddleware, deleteSubcategoria);
 
 module.exports = router;
