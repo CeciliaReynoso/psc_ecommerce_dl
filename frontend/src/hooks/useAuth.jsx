@@ -23,10 +23,10 @@ const useAuth = () => {
       })
         .then(response => {
           setUser(response.data);
-          localStorage.setItem('userNombre', response.data.nombre);
-          localStorage.setItem('userRol', response.data.rol);
-          localStorage.setItem('userDireccion', response.data.direccion);
-          localStorage.setItem('userEmail', response.data.email);
+          window.sessionStorage.setItem('userNombre', response.data.nombre);
+          window.sessionStorage.setItem('userRol', response.data.rol);
+          window.sessionStorage.setItem('userDireccion', response.data.direccion);
+          window.sessionStorage.setItem('userEmail', response.data.email);
         })
         .catch(error => {
           console.error('Error al obtener los datos del usuario:', error);
@@ -51,10 +51,9 @@ const useAuth = () => {
       });
 
       setUser(userResponse.data);
-      localStorage.setItem('userNombre', userResponse.data.nombre);
-      localStorage.setItem('userRol', userResponse.data.rol);
-      localStorage.setItem('userDireccion', userResponse.data.direccion);
-      localStorage.setItem('userEmail', userResponse.data.email);
+      window.sessionStorage.setItem('userNombre', userResponse.data.nombre);
+      window.sessionStorage.setItem('userRol', userResponse.data.rol);
+      window.sessionStorage.setItem('userDireccion', userResponse.data.direccion);
       window.location.href = '/';
       return userResponse.data;
     } catch (error) {
@@ -66,10 +65,9 @@ const useAuth = () => {
   const logout = () => {
     window.sessionStorage.removeItem('token');
     window.sessionStorage.removeItem('email');
-    localStorage.removeItem('userNombre');
-    localStorage.removeItem('userRol');
-    localStorage.removeItem('userDireccion');
-    localStorage.removeItem('userEmail');
+    window.sessionStorage.removeItem('userNombre');
+    window.sessionStorage.removeItem('userRol');
+    window.sessionStorage.removeItem('userDireccion');
     setUser(null);
     setToken(null);
     setAuthToken(null); // Eliminar el token de Axios
