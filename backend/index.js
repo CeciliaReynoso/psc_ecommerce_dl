@@ -11,10 +11,10 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.use("/usuarios", usuariosRoutes);
-app.use("/productos", productosRoutes);
-app.use("/proveedores", proveedoresRoutes); // Usar proveedoresRoutes
-app.use("/subcategorias", subcategoriasRoutes); // Usar subcategoriasRoutes
+app.use("/", usuariosRoutes);
+app.use("/", productosRoutes);
+app.use("/", proveedoresRoutes); // Usar proveedoresRoutes
+app.use("/", subcategoriasRoutes); // Usar subcategoriasRoutes
 
 // Middleware de manejo de errores
 app.use(manejarErroresMiddleware);
