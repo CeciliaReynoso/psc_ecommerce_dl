@@ -3,6 +3,7 @@ import axios from '../../config/axiosConfig';
 import { ENDPOINT } from '../../config/constans';
 import useAuth from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+import '../../Admin.css'; // Importar los estilos de Admin.css
 
 const Subcategorias = () => {
   const { token, user } = useAuth();
@@ -13,13 +14,15 @@ const Subcategorias = () => {
   const [descripcion, setDescripcion] = useState('');
   const [categoriaId, setCategoriaId] = useState('');
   const [error, setError] = useState(null);
+  const [editMode, setEditMode] = useState(false);
+  const [editId, setEditId] = useState(null);
 
   useEffect(() => {
     if (!user) {
       return;
     }
 
-    if (user.rol !== 'COMPRADOR') {
+    if (user.rol !== 'COMPRADOR' && user.rol !== 'ADMINISTRADOR') {
       navigate('/no-autorizado');
       return;
     }
@@ -49,15 +52,29 @@ const Subcategorias = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post(`${ENDPOINT.subcategorias}`, {
-        nombre,
-        descripcion,
-        categoria_id: categoriaId,
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      if (editMode) {
+        await axios.put(`${ENDPOINT.subcategorias}/${editId}`, {
+          nombre,
+          descripcion,
+          categoria_id: categoriaId,
+        }, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setEditMode(false);
+        setEditId(null);
+      } else {
+        await axios.post(`${ENDPOINT.subcategorias}`, {
+          nombre,
+          descripcion,
+          categoria_id: categoriaId,
+        }, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      }
       fetchSubcategorias();
       setNombre('');
       setDescripcion('');
@@ -65,6 +82,14 @@ const Subcategorias = () => {
     } catch (error) {
       setError(error.response.data.message);
     }
+  };
+
+  const handleEdit = (subcategoria) => {
+    setEditMode(true);
+    setEditId(subcategoria.id_subcategoria);
+    setNombre(subcategoria.nombre);
+    setDescripcion(subcategoria.descripcion);
+    setCategoriaId(subcategoria.id_categoria);
   };
 
   const handleDelete = async (id_subcategoria) => {
@@ -81,16 +106,43 @@ const Subcategorias = () => {
   };
 
   return (
-    <div>
+    <div className="admin-container">
       <h1>Gestionar Subcategorías</h1>
-      <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
-        <input type="text" placeholder="Descripción" value={descripcion} onChange={(e) => setDescripcion(e.target.value)} required />
-        <input type="text" placeholder="ID de Categoría" value={categoriaId} onChange={(e) => setCategoriaId(e.target.value)} required />
-        <button type="submit">Agregar Subcategoría</button>
+      {error && <p className="error">{error}</p>}
+      <form onSubmit={handleSubmit} className="form">
+        <label htmlFor="nombre">Nombre</label>
+        <input
+          type="text"
+          id="nombre"
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
+          required
+          className="input-wide"
+          title={nombre}
+        />
+        <label htmlFor="descripcion">Descripción</label>
+        <input
+          type="text"
+          id="descripcion"
+          value={descripcion}
+          onChange={(e) => setDescripcion(e.target.value)}
+          required
+          className="input-wide"
+          title={descripcion}
+        />
+        <label htmlFor="categoriaId">ID de Categoría</label>
+        <input
+          type="text"
+          id="categoriaId"
+          value={categoriaId}
+          onChange={(e) => setCategoriaId(e.target.value)}
+          required
+          className="input-wide"
+          title={categoriaId}
+        />
+        <button type="submit" className="btn btn-primary">{editMode ? 'Actualizar Subcategoría' : 'Agregar Subcategoría'}</button>
       </form>
-      {error && <p>{error}</p>}
-      <table>
+      <table className="table table-striped">
         <thead>
           <tr>
             <th>ID</th>
@@ -108,7 +160,8 @@ const Subcategorias = () => {
               <td>{subcategoria.descripcion}</td>
               <td>{subcategoria.id_categoria}</td>
               <td>
-                <button onClick={() => handleDelete(subcategoria.id_subcategoria)}>Eliminar</button>
+                <button onClick={() => handleEdit(subcategoria)} className="btn btn-secondary">Editar</button>
+                <button onClick={() => handleDelete(subcategoria.id_subcategoria)} className="btn btn-danger">Eliminar</button>
               </td>
             </tr>
           ))}

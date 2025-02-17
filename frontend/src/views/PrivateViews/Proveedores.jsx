@@ -3,11 +3,12 @@ import axios from '../../config/axiosConfig';
 import { ENDPOINT } from '../../config/constans';
 import useAuth from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+import '../../Admin.css';
 
 const Proveedores = () => {
   const { token, user } = useAuth();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState([]);
   const [proveedores, setProveedores] = useState([]);
   const [nombre, setNombre] = useState('');
   const [contacto, setContacto] = useState('');
@@ -23,32 +24,33 @@ const Proveedores = () => {
       return;
     }
 
-    if (user.rol !== 'COMPRADOR') {
+    if (user.rol !== 'COMPRADOR' && user.rol !== 'ADMINISTRADOR') {
       navigate('/no-autorizado');
       return;
     }
 
-    setLoading(false);
+    const fetchProveedores = async () => {
+      try {
+        if (token) {
+          const response = await axios.get(ENDPOINT.proveedores, {
+            headers: { Authorization: `Bearer ${token}` }
+          });
+          console.log('Datos de usuarios:', response.data); // Verificar los datos recibidos
+          setUsuarios(response.data);
+        } else {
+          setError('Token no encontrado');
+        }
+      } catch (error) {
+        setError('Error al obtener usuarios');
+        console.error('Error al obtener los usuarios:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
   }, [user, token, navigate]);
+  
 
-  useEffect(() => {
-    if (!loading) {
-      fetchProveedores();
-    }
-  }, [loading, token]);
-
-  const fetchProveedores = async () => {
-    try {
-      const response = await axios.get(`${ENDPOINT.proveedores}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setProveedores(response.data);
-    } catch (error) {
-      setError(error.response.data.message);
-    }
-  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -68,7 +70,7 @@ const Proveedores = () => {
         setEditMode(false);
         setEditId(null);
       } else {
-        await axios.post(`${ENDPOINT.proveedores}`, {
+        await axios.post(ENDPOINT.proveedores, {
           nombre,
           contacto,
           direccion,
