@@ -11,6 +11,8 @@ app.use(cors());
 
 app.use("/", usuariosRoutes);
 app.use("/", productosRoutes);
+app.use("/", proveedoresRoutes);
+app.use("/", subcategoriasRoutes);
 
 // Middleware de manejo de errores
 app.use(manejarErroresMiddleware);
