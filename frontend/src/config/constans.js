@@ -24,6 +24,9 @@ export const ENDPOINT = {
   proveedor: `${URLBASE}/proveedores/:id`,
   subcategorias: `${URLBASE}/subcategorias`,
   subcategoria: `${URLBASE}/subcategorias/:id`,
+    // Endpoints para productos del administrador
+    productosAdmin: `${URLBASE}/productos-admin`,
+    productoAdmin: `${URLBASE}/productos-admin/:id`,
 
   // Agregar los nuevos endpoints necesarios
   createPost: `${URLBASE}/admin/create-post`,

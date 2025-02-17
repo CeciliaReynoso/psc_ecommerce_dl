@@ -32,6 +32,7 @@ import Proveedores from '../views/PrivateViews/Proveedores';
 import Subcategorias from '../views/PrivateViews/Subcategorias';
 import NuevoProveedor from '../views/PrivateViews/NuevoProveedor';
 import NuevaSubcategoria from '../views/PrivateViews/NuevaSubcategoria';
+import NuevoProducto from '../views/PrivateViews/NuevoProducto';
 
 export const RouterManager = () => {
   const { user } = useAuth();
@@ -59,11 +60,12 @@ export const RouterManager = () => {
               <Route path="/admin/users" element={<UserManagement />} />
               <Route path="/admin/users/edit-user/:id" element={<EditUserForm />} />
               <Route path="/admin/products" element={<ProductManagement />} />
+              <Route path="/admin/products/nuevo" element={<NuevoProducto />} />
               <Route path="/admin/categories" element={<CategoryManagement />} />
               <Route path="/admin/proveedores" element={<Proveedores />} />
               <Route path="/admin/proveedores/nuevo" element={<NuevoProveedor />} />
-              <Route path="/admin/subcategorias/nueva" element={<NuevaSubcategoria />} />
               <Route path="/admin/subcategorias" element={<Subcategorias />} />
+              <Route path="/admin/subcategorias/nueva" element={<NuevaSubcategoria />} />
             </Route>
 
             <Route path="/buyer" element={<BuyerLayout />}>
@@ -72,8 +74,8 @@ export const RouterManager = () => {
               <Route path="/buyer/low-stock-products" element={<LowStockProducts />} />
               <Route path="/buyer/proveedores" element={<Proveedores />} />
               <Route path="/buyer/proveedores/nuevo" element={<NuevoProveedor />} />
-              <Route path="/buyer/subcategorias/nueva" element={<NuevaSubcategoria />} />
               <Route path="/buyer/subcategorias" element={<Subcategorias />} />
+              <Route path="/buyer/subcategorias/nueva" element={<NuevaSubcategoria />} />
             </Route>
 
             <Route path="/seller" element={<SellerLayout />}>

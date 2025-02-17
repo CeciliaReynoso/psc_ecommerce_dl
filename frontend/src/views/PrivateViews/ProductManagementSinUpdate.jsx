@@ -1,3 +1,4 @@
+// src/views/ProductManagement.jsx
 import React, { useEffect, useState } from 'react';
 import axios from '../../config/axiosConfig';
 import { ENDPOINT } from '../../config/constans';
@@ -11,8 +12,13 @@ const ProductManagement = () => {
   const [loading, setLoading] = useState(true);
   const [productos, setProductos] = useState([]);
   const [formData, setFormData] = useState({
+    nombre: '',
+    descripcion: '',
     precio_venta: '',
+    categoria_id: '',
+    subcategoria_id: '',
     stock_minimo: '',
+    proveedor_id: '',
     imagen_url: ''
   });
   const [error, setError] = useState(null);
@@ -62,19 +68,32 @@ const ProductManagement = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.put(`${ENDPOINT.productoAdmin.replace(':id', editId)}`, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      if (editMode) {
+        await axios.put(`${ENDPOINT.productosAdmin}/${editId}`, formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setEditMode(false);
+        setEditId(null);
+      } else {
+        await axios.post(`${ENDPOINT.productosAdmin}`, formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      }
       fetchProductos();
       setFormData({
+        nombre: '',
+        descripcion: '',
         precio_venta: '',
+        categoria_id: '',
+        subcategoria_id: '',
         stock_minimo: '',
+        proveedor_id: '',
         imagen_url: ''
       });
-      setEditMode(false);
-      setEditId(null);
     } catch (error) {
       setError(error.response.data.message);
     }
@@ -84,15 +103,20 @@ const ProductManagement = () => {
     setEditMode(true);
     setEditId(producto.id_producto);
     setFormData({
+      nombre: producto.nombre,
+      descripcion: producto.descripcion,
       precio_venta: producto.precio_venta,
+      categoria_id: producto.categoria_id,
+      subcategoria_id: producto.subcategoria_id,
       stock_minimo: producto.stock_minimo,
+      proveedor_id: producto.proveedor_id,
       imagen_url: producto.imagen_url
     });
   };
 
   const handleDelete = async (id_producto) => {
     try {
-      await axios.delete(`${ENDPOINT.productoAdmin.replace(':id', id_producto)}`, {
+      await axios.delete(`${ENDPOINT.productosAdmin}/${id_producto}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -108,7 +132,7 @@ const ProductManagement = () => {
       <h1>Gestionar Productos</h1>
       {error && <p className="error">{error}</p>}
       <button onClick={() => navigate('/admin/products/nuevo')} className="btn btn-primary">Agregar Nuevo Producto</button>
-      <table className="table table-striped">
+      <table className="table">
         <thead>
           <tr>
             <th>ID</th>
@@ -136,56 +160,13 @@ const ProductManagement = () => {
               <td>{producto.subcategoria_id}</td>
               <td>{producto.proveedor_id}</td>
               <td>
-                <button onClick={() => handleEdit(producto)} className="btn btn-secondary">Editar</button>
-                <button onClick={() => handleDelete(producto.id_producto)} className="btn btn-danger">Eliminar</button>
+                <button onClick={() => handleEdit(producto)} >Editar</button>
+                <button onClick={() => handleDelete(producto.id_producto)} >Eliminar</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-
-      {editMode && (
-        <form onSubmit={handleSubmit}>
-          <h2>Editar Producto</h2>
-          <div className="form-group">
-            <label htmlFor="precio_venta">Precio de Venta</label>
-            <input
-              type="number"
-              id="precio_venta"
-              name="precio_venta"
-              value={formData.precio_venta}
-              onChange={handleChange}
-              className="form-control"
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="stock_minimo">Stock Mínimo</label>
-            <input
-              type="number"
-              id="stock_minimo"
-              name="stock_minimo"
-              value={formData.stock_minimo}
-              onChange={handleChange}
-              className="form-control"
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="imagen_url">URL de la Imagen</label>
-            <input
-              type="text"
-              id="imagen_url"
-              name="imagen_url"
-              value={formData.imagen_url}
-              onChange={handleChange}
-              className="form-control"
-              required
-            />
-          </div>
-          <button type="submit" className="btn btn-primary">Guardar Cambios</button>
-        </form>
-      )}
     </div>
   );
 };

@@ -25,7 +25,7 @@ const Admin = () => {
         <button onClick={() => navigate('/admin/users')} className="btn">Administración de Usuarios</button>
         <button onClick={() => navigate('/admin/products')} className="btn">Administración de Productos</button>
         <button onClick={() => navigate('/admin/subcategorias')} className="btn">Administración de Subcategorías</button>
-        <button onClick={() => navigate('/admin/proveedores')} className="btn">Crear Proveedor</button>
+        <button onClick={() => navigate('/admin/proveedores')} className="btn">Administración de Proveedores</button>
       </div>
     </div>
   );
