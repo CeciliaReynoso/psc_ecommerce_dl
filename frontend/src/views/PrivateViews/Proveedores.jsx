@@ -175,7 +175,7 @@
           />
           <button type="submit" className="btn btn-primary">{'Actualizar Proveedor'}</button>
         </form>
-        <table className="table table-striped">
+        <table className="table ">
           <thead>
             <tr>
               <th>ID</th>

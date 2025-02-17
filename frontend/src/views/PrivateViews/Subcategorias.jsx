@@ -141,7 +141,7 @@ const Subcategorias = () => {
         <button type="submit" className="btn btn-primary">{'Actualizar Subcategoría'}</button>
       </form>
       </div>
-      <table className="table table-striped">
+      <table className="table ">
         <thead>
           <tr>
             <th>ID</th>
