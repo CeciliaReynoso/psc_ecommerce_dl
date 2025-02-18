@@ -11,7 +11,7 @@ const verificarCredencialesMiddleware = (req, res, next) => {
 const validarTokenMiddleware = (req, res, next) => {
   const Authorization = req.header("Authorization");
   if (!Authorization) {
-    return res.status(401).send("Token no proporcionado");
+    return res.status(401).send("Token no proporcionado o expirado");
   }
   const token = Authorization.split("Bearer ")[1];
   if (!token) {
@@ -22,7 +22,7 @@ const validarTokenMiddleware = (req, res, next) => {
     req.user = decoded;
     next();
   } catch (error) {
-    res.status(401).send("Token inválido");
+    res.status(401).send("Token inválido o expirado");
   }
 };
 
