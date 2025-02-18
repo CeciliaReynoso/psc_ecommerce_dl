@@ -108,7 +108,7 @@ const ProductManagement = () => {
       <h1>Gestionar Productos</h1>
       {error && <p className="error">{error}</p>}
       <button onClick={() => navigate('/admin/products/nuevo')} className="btn btn-primary">Agregar Nuevo Producto</button>
-      <table className="table table-striped">
+      <table className="table">
         <thead>
           <tr>
             <th>ID</th>
@@ -136,8 +136,8 @@ const ProductManagement = () => {
               <td>{producto.subcategoria_id}</td>
               <td>{producto.proveedor_id}</td>
               <td>
-                <button onClick={() => handleEdit(producto)} className="btn btn-secondary">Editar</button>
-                <button onClick={() => handleDelete(producto.id_producto)} className="btn btn-danger">Eliminar</button>
+                <button onClick={() => handleEdit(producto)} >Editar</button>
+                <button onClick={() => handleDelete(producto.id_producto)} >Eliminar</button>
               </td>
             </tr>
           ))}
