@@ -11,9 +11,9 @@ const Subcategorias = () => {
   const [loading, setLoading] = useState(true);
   const [subcategorias, setSubcategorias] = useState([]);
   const [formData, setFormData] = useState({
+    id_categoria: '',
     nombre: '',
-    descripcion: '',
-    categoria_id: ''
+    descripcion: ''
   });
   const [error, setError] = useState(null);
   const [editMode, setEditMode] = useState(false);
@@ -79,9 +79,9 @@ const Subcategorias = () => {
       }
       fetchSubcategorias();
       setFormData({
+        id_categoria: '',
         nombre: '',
-        descripcion: '',
-        categoria_id: ''
+        descripcion: ''
       });
     } catch (error) {
       setError(error.response.data.message);
@@ -92,9 +92,9 @@ const Subcategorias = () => {
     setEditMode(true);
     setEditId(subcategoria.id_subcategoria);
     setFormData({
+      id_categoria: subcategoria.id_categoria,
       nombre: subcategoria.nombre,
-      descripcion: subcategoria.descripcion,
-      categoria_id: subcategoria.id_categoria
+      descripcion: subcategoria.descripcion
     });
   };
 
@@ -117,36 +117,47 @@ const Subcategorias = () => {
       {error && <p className="error">{error}</p>}
       <button onClick={() => navigate('/admin/subcategorias/nueva')} className="btn btn-primary">Agregar Nueva Subcategoría</button>
       <div className="form-container">
-      <form onSubmit={handleSubmit} className="form-box">
-        <label htmlFor="nombre">Nombre</label>
-        <input
-          type="text"
-          id="nombre"
-          name="nombre"
-          value={formData.nombre}
-          onChange={handleChange}
-          required
-          className="input-wide"
-        />
-        <label htmlFor="descripcion">Descripción</label>
-        <input
-          type="text"
-          id="descripcion"
-          name="descripcion"
-          value={formData.descripcion}
-          onChange={handleChange}
-          required
-          className="input-wide"
-        />
-        <button type="submit" className="btn btn-primary">{'Actualizar Subcategoría'}</button>
-      </form>
+        <form onSubmit={handleSubmit} className="form-box">
+          <label htmlFor="id_categoria">ID de Categoría</label>
+          <input
+            type="number"
+            id="id_categoria"
+            name="id_categoria"
+            value={formData.id_categoria}
+            onChange={handleChange}
+            required
+            className="input-wide"
+          />
+          <label htmlFor="nombre">Nombre</label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            value={formData.nombre}
+            onChange={handleChange}
+            required
+            className="input-wide"
+          />
+          <label htmlFor="descripcion">Descripción</label>
+          <input
+            type="text"
+            id="descripcion"
+            name="descripcion"
+            value={formData.descripcion}
+            onChange={handleChange}
+            required
+            className="input-wide"
+          />
+          <button type="submit" className="btn btn-primary">{editMode ? 'Actualizar Subcategoría' : 'Agregar Subcategoría'}</button>
+        </form>
       </div>
-      <table className="table ">
+      <table className="table">
         <thead>
           <tr>
             <th>ID</th>
             <th>Nombre</th>
             <th>Descripción</th>
+            <th>ID de Categoría</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -156,6 +167,7 @@ const Subcategorias = () => {
               <td>{subcategoria.id_subcategoria}</td>
               <td>{subcategoria.nombre}</td>
               <td>{subcategoria.descripcion}</td>
+              <td>{subcategoria.id_categoria}</td>
               <td>
                 <button onClick={() => handleEdit(subcategoria)} className="btn btn-secondary">Editar</button>
                 <button onClick={() => handleDelete(subcategoria.id_subcategoria)} className="btn btn-danger">Eliminar</button>

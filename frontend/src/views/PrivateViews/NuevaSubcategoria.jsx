@@ -10,9 +10,9 @@ const NuevaSubcategoria = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
+    id_categoria: '',
     nombre: '',
-    descripcion: '',
-    categoria_id: ''
+    descripcion: ''
   });
   const [error, setError] = useState(null);
 
@@ -57,6 +57,16 @@ const NuevaSubcategoria = () => {
         <h1>Agregar Nueva Subcategoría</h1>
         {error && <p className="error">{error}</p>}
         <form onSubmit={handleSubmit} className="form">
+          <label htmlFor="id_categoria">ID de Categoría</label>
+          <input
+            type="number"
+            id="id_categoria"
+            name="id_categoria"
+            value={formData.id_categoria}
+            onChange={handleChange}
+            required
+            className="input-wide"
+          />
           <label htmlFor="nombre">Nombre</label>
           <input
             type="text"
