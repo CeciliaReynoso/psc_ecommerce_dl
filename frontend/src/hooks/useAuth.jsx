@@ -54,7 +54,7 @@ const useAuth = () => {
       window.sessionStorage.setItem('userNombre', userResponse.data.nombre);
       window.sessionStorage.setItem('userRol', userResponse.data.rol);
       window.sessionStorage.setItem('userDireccion', userResponse.data.direccion);
-      window.location.href = '/';
+      // window.location.href = '/';
       return userResponse.data;
     } catch (error) {
       console.error('Error al iniciar sesión:', error.response.data);

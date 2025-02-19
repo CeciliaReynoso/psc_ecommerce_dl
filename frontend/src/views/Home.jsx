@@ -20,7 +20,7 @@ const Home = () => {
     <div>      
         <h2>Conversa con nosotros</h2>
         {user ? (
-          user.rol === 'cliente' ? (
+          user.rol === 'CLIENTE' ? (
             <p>Bienvenido {user.nombre}</p>
           ) : (
             <p>Hola, {user.nombre}. Has iniciado sesion como: {user.rol}</p>

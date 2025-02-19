@@ -7,31 +7,25 @@ const HomePerfil = () => {
   const { cargo, setCargo } = useContext(RolesContext);
 
   useEffect(() => {
-    const userNombre = localStorage.getItem('userNombre');
-    const userRol = localStorage.getItem('userRol');
-    const userEmail = localStorage.getItem('userEmail');
-    const userDireccion = localStorage.getItem('userDireccion');
-    
- 
-    setCargo({ nombre: userNombre, rol: userRol, email: userEmail, direccion: userDireccion });
-    
-  }, [setCargo]);
+    if (user) {
+      const userNombre = localStorage.getItem('userNombre');
+      const userRol = localStorage.getItem('userRol');
+      const userEmail = localStorage.getItem('userEmail');
+      const userDireccion = localStorage.getItem('userDireccion');
+      
+      setCargo({ nombre: userNombre, rol: userRol, email: userEmail, direccion: userDireccion });
+    }
+  }, [user, setCargo]);
 
   return (
-
     <div>
-        <h1>
-          Mi Perfil 
-        </h1>
-        <p>Datos registrados</p>
-        <p>Nombre: {cargo?.nombre}</p>
-        <p>Rol: {cargo?.rol}</p>
-        <p>Dirección: {cargo?.direccion}</p>
-        <p>Email: {cargo?.email}</p>
+      <h2>Mi Perfil</h2>
+      <p>Datos registrados</p>
+      <p>Nombre: {user?.nombre}</p>
+      <p>Rol: {user?.rol}</p>
+      <p>Dirección: {user?.direccion}</p>
+      <p>Email: {user?.email}</p>
     </div>
-
-  
-    
   );
 };
 

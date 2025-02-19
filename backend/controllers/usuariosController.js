@@ -24,7 +24,7 @@ const postLogin = async (req, res, next) => {
     const token = jwt.sign(
       { email: user.email, password: user.password },
       process.env.JWT_SECRET,
-      { algorithm: 'HS256', expiresIn: '1h' }
+      { algorithm: 'HS256', expiresIn: '3h' }
     );
     res.json({ token });
   } catch (error) {
