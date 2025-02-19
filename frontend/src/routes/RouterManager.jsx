@@ -16,23 +16,19 @@ import Detail from '../views/Detail';
 import Buyer from '../views/PrivateViews/Buyer';
 import Seller from '../views/PrivateViews/Seller';
 import UserManagement from '../views/PrivateViews/UserManagement';
-import EditUserForm from '../views/PrivateViews/EditUserForm';
 import ProductManagement from '../views/PrivateViews/ProductManagement';
 import CategoryManagement from '../views/PrivateViews/CategoryManagement';
-import SupplierOrders from '../views/PrivateViews/SupplierOrders';
+import SupplierOrders from '../views/PrivateViews/SupplierOrders'; // Asegúrate de importar SupplierOrders
 import CustomerOrders from '../views/PrivateViews/CustomerOrders';
 import LowStockProducts from '../views/PrivateViews/LowStockProducts';
 import IncompleteOrders from '../views/PrivateViews/IncompleteOrders';
 import BuyerLayout from '../layouts/BuyerLayout';
 import SellerLayout from '../layouts/SellerLayout';
+// import CreatePost from '../views/PrivateViews/CreatePost';
+// import GalleryPosts from '../views/PrivateViews/GalleryPost'; // Asegúrate de importar GalleryPosts
 import { ROLES } from '../helpers/roles';
 import { RolesProvider } from '../context/RolesContext';
 import useAuth from '../hooks/useAuth';
-import Proveedores from '../views/PrivateViews/Proveedores';
-import Subcategorias from '../views/PrivateViews/Subcategorias';
-import NuevoProveedor from '../views/PrivateViews/NuevoProveedor';
-import NuevaSubcategoria from '../views/PrivateViews/NuevaSubcategoria';
-import NuevoProducto from '../views/PrivateViews/NuevoProducto';
 
 export const RouterManager = () => {
   const { user } = useAuth();
@@ -58,27 +54,17 @@ export const RouterManager = () => {
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<Admin />} />        
               <Route path="/admin/users" element={<UserManagement />} />
-              <Route path="/admin/users/edit-user/:id" element={<EditUserForm />} />
-              <Route path="/admin/products" element={<ProductManagement />} />
-              <Route path="/admin/products/nuevo" element={<NuevoProducto />} />
-              <Route path="/admin/categories" element={<CategoryManagement />} />
-              <Route path="/admin/proveedores" element={<Proveedores />} />
-              <Route path="/admin/proveedores/nuevo" element={<NuevoProveedor />} />
-              <Route path="/admin/subcategorias" element={<Subcategorias />} />
-              <Route path="/admin/subcategorias/nueva" element={<NuevaSubcategoria />} />
+              <Route path="/admin/products" element={< PrivateRoute allowedRoles={[ROLES.ADMIN]}><ProductManagement /></PrivateRoute>} />
+              <Route path="/admin/categories" element={< PrivateRoute allowedRoles={[ROLES.ADMIN]}><CategoryManagement /></PrivateRoute>} />
             </Route>
 
-            <Route path="/buyer" element={<BuyerLayout />}>
+            <Route path="/buyer" element={<AuthGuard allowedRoles={[ROLES.COMPRADOR]}><BuyerLayout /></AuthGuard>}>
               <Route index element={<Buyer />} />
               <Route path="/buyer/orders" element={<SupplierOrders />} />
               <Route path="/buyer/low-stock-products" element={<LowStockProducts />} />
-              <Route path="/buyer/proveedores" element={<Proveedores />} />
-              <Route path="/buyer/proveedores/nuevo" element={<NuevoProveedor />} />
-              <Route path="/buyer/subcategorias" element={<Subcategorias />} />
-              <Route path="/buyer/subcategorias/nueva" element={<NuevaSubcategoria />} />
             </Route>
 
-            <Route path="/seller" element={<SellerLayout />}>
+            <Route path="/seller" element={<AuthGuard allowedRoles={[ROLES.VENDEDOR]}><SellerLayout /></AuthGuard>}>
               <Route index element={<Seller />} />
               <Route path="/seller/orders" element={<CustomerOrders />} />
               <Route path="/seller/incomplete-orders" element={<IncompleteOrders />} />
