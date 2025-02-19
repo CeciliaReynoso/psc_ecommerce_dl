@@ -8,7 +8,7 @@ const SellerLayout = () => {
     <div>
       <Navigation />
       <main className='app-container'>  
-         <div style={{paddingLeft: '3rem'}}>  
+         <div style={{padding: '3rem'}}>  
          <div className='className="table table-striped"'> 
          </div>                                        
           <Outlet />    
