@@ -18,7 +18,7 @@ const Home = () => {
 
   return (
     <div>      
-        <h2>Conversa con nosotros</h2>
+        <h2>Ir a explorar más</h2>
         {user ? (
           user.rol === 'CLIENTE' ? (
             <p>Bienvenido {user.nombre}</p>

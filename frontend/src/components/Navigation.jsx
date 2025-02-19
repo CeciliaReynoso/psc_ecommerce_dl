@@ -24,8 +24,9 @@ const Navigation = ({ total = 0 }) => {
         return (
           <>
             <button onClick={() => navigate('/')} className='btn home-btn'>Inicio</button>
+            <button onClick={() => navigate('/')} className='btn home-btn'>Tienda</button>
             <button onClick={() => navigate('/home-perfil')} className='btn profile-btn'>Perfil</button>
-            <button onClick={handleLogout} className='btn logout-btn'>Cerrar sesión</button>
+            <button onClick={handleLogout} className='btn logout-btn'>Logout</button>
             <div className='cart-container' onClick={() => navigate('/cart')}>
               <img src='/assets/bag.PNG' alt='Carrito de compras' className='cart-icon' /> Total: ${total}
             </div>
@@ -76,15 +77,14 @@ const Navigation = ({ total = 0 }) => {
   };
 
   return (
-    <nav className="navbar">
-      <div className="navbar-brand">
-        <img src="/assets/Logo.png" alt="logo" className="logo" />
-        {/* <img src="/assets/slogan.png" alt="slogan" className="slogan" /> */}
-        <img src="/assets/brand1.PNG" alt="brand1" className="brand1"/>
-        <img src="/assets/brand2.PNG" alt="brand2" className="brand2"/>
-        <img src="/assets/brand3.PNG" alt="brand3" className="brand3"/>
-        <img src="/assets/brand4.PNG" alt="brand4" className="brand4" />
-        <img src="/assets/paws.PNG" alt="paws" className="paws" />
+    <nav className="navbar"> 
+    <div className="navbar-brand">     
+        <img src="/assets/Logo.png" alt="logo" className="logo" />   
+        <img src="/assets/brand1.PNG" alt="brand1" className="brand"/>
+        <img src="/assets/brand2.PNG" alt="brand2" className="brand"/>
+        <img src="/assets/brand3.PNG" alt="brand3" className="brand"/>
+        <img src="/assets/brand4.PNG" alt="brand4" className="brand" />
+        <img src="/assets/paws.PNG" alt="paws" className="paws" /> 
 
       </div>
       <div className="opciones">

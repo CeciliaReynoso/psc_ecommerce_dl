@@ -105,8 +105,10 @@ a {
 .navbar-brand {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 2px;
   text-decoration: none;
+  width: 50%;
 }
 .navbar .logo {
   font-family: 'Dingos Stamp', 'Hind Siliguri', sans-serif;
@@ -117,17 +119,18 @@ a {
   height: 80px;
   border-radius: 5px;
   color: var(--color-secondary);
+  text-align: center;
 }
-
 .navbar .opciones {
   display: flex;
   align-items: center;
   margin: auto;
+  padding: auto;
   
 }
 
 .navbar .opciones button {
-  margin-left: 20px;
+  margin-left: 5px;
   padding: 10px 20px;
   background: transparent;
   color: var(--color-text);
@@ -325,7 +328,7 @@ a {
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
   }
 
   .app-container {

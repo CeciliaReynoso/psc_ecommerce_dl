@@ -19,7 +19,7 @@ const HomePerfil = () => {
 
   return (
     <div>
-      <h2>Mi Perfil</h2>
+      <h3>Mi Perfil</h3>
       <p>Datos registrados</p>
       <p>Nombre: {user?.nombre}</p>
       <p>Rol: {user?.rol}</p>
