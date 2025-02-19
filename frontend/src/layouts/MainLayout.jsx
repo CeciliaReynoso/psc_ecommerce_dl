@@ -10,8 +10,6 @@ const MainLayout = () => {
     <div className='app-container'> 
       <main>
       <Navigation />
-      <Hero />
-      <RecentPosts />
       <ProductGallery />
         <Outlet />
       </main>

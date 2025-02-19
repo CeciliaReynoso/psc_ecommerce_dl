@@ -6,8 +6,6 @@ const PrivateRoute = ({ children, allowedRoles }) => {
   const { user } = useAuth();
   const userRol = user?.rol;
 
-  return user ? children : <Navigate to="/login" />;
-
   if (!userRol) {
     // Si no hay rol, redirigir al login
     return <Navigate to="/" />;

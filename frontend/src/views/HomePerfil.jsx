@@ -28,9 +28,6 @@ const HomePerfil = () => {
         <p>Rol: {cargo?.rol}</p>
         <p>Dirección: {cargo?.direccion}</p>
         <p>Email: {cargo?.email}</p>
-      <footer>
-        <p>© 2025 PetsCare. Todos los derechos reservados.</p>
-      </footer>
     </div>
 
   

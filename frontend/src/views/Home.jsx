@@ -17,9 +17,8 @@ const Home = () => {
   }, [setCargo]);
 
   return (
-    <div>
-      <div>
-        <h1>Conversa con nosotros</h1>
+    <div>      
+        <h2>Conversa con nosotros</h2>
         {user ? (
           user.rol === 'cliente' ? (
             <p>Bienvenido {user.nombre}</p>
@@ -28,9 +27,7 @@ const Home = () => {
           )
         ) : (
           <p>Inicia sesión o registrate</p>
-        )}
-      </div>
-      
+        )}     
     </div>
   );
 };
