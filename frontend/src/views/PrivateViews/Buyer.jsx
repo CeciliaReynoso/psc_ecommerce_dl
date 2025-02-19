@@ -17,6 +17,18 @@ const Buyer = () => {
     }
   }, [setCargo]);
 
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+
+    if (user.rol !== 'ADMINISTRADOR') {
+      navigate('/no-autorizado');
+      return;
+    }
+  }, [user, navigate]);
+
+
   return (
     <div className="buyer-container">
       <h1>Gestión de Pedidos a Proveedor</h1>

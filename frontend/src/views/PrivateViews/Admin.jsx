@@ -5,7 +5,7 @@ import useAuth from '../../hooks/useAuth';
 
 const Admin = () => {
   const { setCargo } = useContext(RolesContext);
-  const { user } = useAuth();
+  const { token, user } = useAuth();
   const navigate = useNavigate();
 
     useEffect(() => {
@@ -16,7 +16,17 @@ const Admin = () => {
         setCargo({ nombre: userNombre, rol: userRol });
       }
     }, [setCargo]);
-  
+
+      useEffect(() => {
+        if (!user) {
+          return;
+        }
+    
+        if (user.rol !== 'ADMINISTRADOR') {
+          navigate('/no-autorizado');
+          return;
+        }
+      }, [user, navigate]);
 
   return (
     <div className="admin-container">
@@ -29,6 +39,6 @@ const Admin = () => {
       </div>
     </div>
   );
-};
+  };
 
 export default Admin;

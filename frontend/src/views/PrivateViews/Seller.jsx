@@ -1,8 +1,22 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
 const Seller = () => {
+  const { user } = useAuth();
   const navigate = useNavigate();
+
+        useEffect(() => {
+          if (!user) {
+            return;
+          }
+      
+          if (user.rol !== 'ADMINISTRADOR') {
+            navigate('/no-autorizado');
+            return;
+          }
+        }, [user, navigate]);
+  
 
   return (
     <div className="seller-container">
