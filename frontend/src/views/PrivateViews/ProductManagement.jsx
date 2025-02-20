@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from '../../config/axiosConfig';
 import { ENDPOINT } from '../../config/constans';
 import useAuth from '../../hooks/useAuth';
@@ -11,6 +11,7 @@ const ProductManagement = () => {
   const [loading, setLoading] = useState(true);
   const [productos, setProductos] = useState([]);
   const [formData, setFormData] = useState({
+    descripcion: '',
     precio_venta: '',
     stock_minimo: '',
     imagen_url: ''
@@ -69,6 +70,7 @@ const ProductManagement = () => {
       });
       fetchProductos();
       setFormData({
+        descripcion: '',
         precio_venta: '',
         stock_minimo: '',
         imagen_url: ''
@@ -84,6 +86,7 @@ const ProductManagement = () => {
     setEditMode(true);
     setEditId(producto.id_producto);
     setFormData({
+      descripcion: producto.descripcion,
       precio_venta: producto.precio_venta,
       stock_minimo: producto.stock_minimo,
       imagen_url: producto.imagen_url
@@ -147,6 +150,20 @@ const ProductManagement = () => {
       {editMode && (
         <form onSubmit={handleSubmit}>
           <h2>Editar Producto</h2>
+          <div className="form-group">
+            <label htmlFor="descripcion">Descripcion</label>
+            <input
+              type="text"
+              id="descripcion"
+              name="descripcion"
+              value={formData.descripcion}
+              onChange={handleChange}
+              className="form-control"
+              required
+              style={{ width: '100%' }} // Ampliar el ancho del recuadro
+            />
+          </div>
+
           <div className="form-group">
             <label htmlFor="precio_venta">Precio de Venta</label>
             <input

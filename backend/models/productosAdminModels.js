@@ -13,10 +13,10 @@ const crearProductoAdmin = async ({ nombre, descripcion, precio_venta, categoria
   return rows[0];
 };
 
-const actualizarProductoAdmin = async (id_producto, { precio_venta, stock_minimo, imagen_url }) => {
+const actualizarProductoAdmin = async (id_producto, { descripcion, precio_venta, stock_minimo, imagen_url }) => {
   const { rows } = await DB.query(
-    'UPDATE productos SET precio_venta = $1, stock_minimo = $2, imagen_url = $3, fecha_actualizacion = CURRENT_TIMESTAMP WHERE id_producto = $4 RETURNING *',
-    [precio_venta, stock_minimo, imagen_url, id_producto]
+    'UPDATE productos SET descripcion=$1, precio_venta = $2, stock_minimo = $3, imagen_url = $4, fecha_actualizacion = CURRENT_TIMESTAMP WHERE id_producto = $5 RETURNING *',
+    [descripcion,precio_venta, stock_minimo, imagen_url, id_producto]
   );
   return rows[0];
 };
