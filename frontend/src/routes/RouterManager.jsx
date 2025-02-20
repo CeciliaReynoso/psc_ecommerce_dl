@@ -1,5 +1,4 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import PrivateRoute from '../guards/PrivateRoute';
 import MainLayout from '../layouts/MainLayout';
 import AdminLayout from '../layouts/AdminLayout';
 import AuthGuard from '../guards/AuthGuard';
@@ -33,6 +32,7 @@ import Subcategorias from '../views/PrivateViews/Subcategorias';
 import NuevoProveedor from '../views/PrivateViews/NuevoProveedor';
 import NuevaSubcategoria from '../views/PrivateViews/NuevaSubcategoria';
 import NuevoProducto from '../views/PrivateViews/NuevoProducto';
+import ProductGallery from '../components/ProductGallery';
 
 export const RouterManager = () => {
   const { user } = useAuth();
@@ -53,6 +53,7 @@ export const RouterManager = () => {
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/detail/:id" element={<Detail />} />
               <Route path="/home-perfil" element={<HomePerfil />} />
+              <Route path="/productos-promocion" element={<ProductGallery />} />
             </Route>
 
             <Route path="/admin" element={<AdminLayout />}>

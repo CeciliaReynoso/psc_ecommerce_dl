@@ -8,6 +8,7 @@ export const ENDPOINT = {
   products: `${URLBASE}/productos`, 
   productsFilter:`${URLBASE}/productos/filtros`,
   product: `${URLBASE}/productos/:id`, 
+  promocion: `${URLBASE}/productos/promocion`,
 
   // Endpoints privados
   users: `${URLBASE}/usuarios`,
@@ -27,7 +28,7 @@ export const ENDPOINT = {
     // Endpoints para productos del administrador
     productosAdmin: `${URLBASE}/productos-admin`,
     productoAdmin: `${URLBASE}/productos-admin/:id`,
-
+  
   // Agregar los nuevos endpoints necesarios
   createPost: `${URLBASE}/admin/create-post`,
   galleryPosts: `${URLBASE}/admin/gallery-posts`,

@@ -8,7 +8,7 @@ module.exports = {
     SERVER_ERROR: {
         id: 'serverError',
         statusCode: 500,
-        message: 'Error interno en el servidor. Pruba más tarde',
+        message: 'Error interno en el servidor. Prueba más tarde',
         description: 'Error inesperado en el servidor',
     }
 }

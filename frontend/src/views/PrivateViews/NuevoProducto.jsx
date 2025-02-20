@@ -3,7 +3,6 @@ import axios from '../../config/axiosConfig';
 import { ENDPOINT } from '../../config/constans';
 import useAuth from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
-// import '../../Admin.css';
 
 const NuevoProducto = () => {
   const { token, user } = useAuth();
