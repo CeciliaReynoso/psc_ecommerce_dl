@@ -2,17 +2,12 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import { ROLES } from '../helpers/roles';
+import '../Navbar.css'
 
 const Navigation = ({ total = 0 }) => {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
 
-    //useEffect(() => {
-    //     if (user && user.rol? !== 'CLIENTE') {            
-    //         navigate('/');
-    //     }
-    // }, [user, navigate]);
-    
   const handleLogout = () => {
     logout();
     navigate('/');
@@ -81,7 +76,7 @@ const Navigation = ({ total = 0 }) => {
     <div className="navbar-brand">     
         <img src="/assets/Logo.png" alt="logo" className="logo" />   
         <img src="/assets/brand1.PNG" alt="brand1" className="brand"/>
-        <img src="/assets/brand2.PNG" alt="brand2" className="brand"/>
+        <img src="/assets/brand2.PNG" alt="brand2" className="brand2"/>
         <img src="/assets/brand3.PNG" alt="brand3" className="brand"/>
         <img src="/assets/brand4.PNG" alt="brand4" className="brand" />
         <img src="/assets/paws.PNG" alt="paws" className="paws" /> 

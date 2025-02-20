@@ -16,8 +16,8 @@ const ProductCard = ({ product }) => {
         <h3 className="card-title">{product.nombre}</h3>
         <p className="card-text">{product.descripcion}</p>
         <p className="card-text">Precio: ${product.precio_venta}</p>
-        <Link to={`/detail/${product.id_producto}`} className="btn btn-primary card-link">Ver Detalle</Link>
-        <button className="btn btn-secondary" onClick={handleAddToCart}>Agregar al Carrito</button>
+        <Link to={`/detail/${product.id_producto}`} className="btn btn-accent card-link">Ver Detalle</Link>
+        <button className="btn btn-primary" onClick={handleAddToCart}>Agregar al Carrito</button>
       </div>
     </div>
   );

@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --color-primary: #fff;
-  --color-secondary: #f48b48;
+  --color-primary: #f48b48;
+  --color-secondary: #fff;
   --color-accent: #fedd62;
   --color-highlight: #e79f1c;
   --color-background: #ffffff;
@@ -116,6 +116,10 @@ a {
   align-items: center;
   gap: 2px;
   text-decoration: none;
+}
+
+.navbar-brand .brand2 {
+  padding-top: 5px;
 }
 .navbar .logo {
   font-family: 'Dingos Stamp', 'Hind Siliguri', sans-serif;
