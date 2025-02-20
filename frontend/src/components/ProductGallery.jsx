@@ -71,6 +71,7 @@ const ProductGallery = () => {
     <div className="app-container">
     <section className="recent-posts">
       <h2>Publicaciones Recientes</h2>
+      
     </section>
 
       <div className="gallery-container">

@@ -11,7 +11,7 @@ const Seller = () => {
             return;
           }
       
-          if (user.rol !== 'ADMINISTRADOR') {
+          if (user.rol !== 'VENDEDOR') {
             navigate('/no-autorizado');
             return;
           }

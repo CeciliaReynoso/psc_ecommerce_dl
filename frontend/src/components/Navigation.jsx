@@ -7,7 +7,7 @@ const Navigation = ({ total = 0 }) => {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
 
-    // useEffect(() => {
+    //useEffect(() => {
     //     if (user && user.rol? !== 'CLIENTE') {            
     //         navigate('/');
     //     }
@@ -26,7 +26,7 @@ const Navigation = ({ total = 0 }) => {
             <button onClick={() => navigate('/')} className='btn home-btn'>Inicio</button>
             <button onClick={() => navigate('/')} className='btn home-btn'>Tienda</button>
             <button onClick={() => navigate('/home-perfil')} className='btn profile-btn'>Perfil</button>
-            <button onClick={handleLogout} className='btn logout-btn'>Logout</button>
+            <button onClick={handleLogout} className='btn logout-btn'>Cerrar Sesión</button>
             <div className='cart-container' onClick={() => navigate('/cart')}>
               <img src='/assets/bag.PNG' alt='Carrito de compras' className='cart-icon' /> Total: ${total}
             </div>

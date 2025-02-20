@@ -17,8 +17,9 @@ const Home = () => {
   }, [setCargo]);
 
   return (
-    <div>      
-        <h2>Ir a explorar más</h2>
+    <div>
+      <div className='app-container'>
+        <h1>Conversa con nosotros</h1>
         {user ? (
           user.rol === 'CLIENTE' ? (
             <p>Bienvenido {user.nombre}</p>
@@ -27,7 +28,9 @@ const Home = () => {
           )
         ) : (
           <p>Inicia sesión o registrate</p>
-        )}     
+        )}
+      </div>
+      
     </div>
   );
 };

@@ -22,7 +22,7 @@ const Buyer = () => {
       return;
     }
 
-    if (user.rol !== 'ADMINISTRADOR') {
+    if (user.rol !== 'COMPRADOR') {
       navigate('/no-autorizado');
       return;
     }
