@@ -2,12 +2,13 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import { ROLES } from '../helpers/roles';
+import { useCart } from '../hooks/useCart';
 import '../Navbar.css'
 
 const Navigation = ({ total = 0 }) => {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
-
+  const { cart} = useCart();
   const handleLogout = () => {
     logout();
     navigate('/');
@@ -23,7 +24,7 @@ const Navigation = ({ total = 0 }) => {
             <button onClick={() => navigate('/home-perfil')} className='btn profile-btn'>Perfil</button>
             <button onClick={handleLogout} className='btn logout-btn'>Cerrar Sesión</button>
             <div className='cart-container' onClick={() => navigate('/cart')}>
-              <img src='/assets/bag.PNG' alt='Carrito de compras' className='cart-icon' /> Total: ${total}
+              <img src='/assets/bag.PNG' alt='Carrito de compras' className='cart-icon' /> Total: ${cart.length}}
             </div>
           </>
         );
