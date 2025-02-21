@@ -8,7 +8,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   color: var(--color-text);
   position: fixed;
-  width: 45%;
+  width: 25%;
   z-index: 1060;
 }
 
@@ -70,6 +70,8 @@
 .btn-primary {
   background-color: var(--color-primary);
   color: var(--color-secondary);
+  font-size: 16px; /* Hacer el botón de pagar más grande */
+  padding: 12px 20px; /* Aumentar el padding del botón de pagar */
 }
 
 .btn-primary:disabled {
@@ -79,6 +81,7 @@
 .btn-danger {
   background-color: var(--color-warning);
   color: var(--color-secondary);
+  padding: 5px 10px; /* Reducir el tamaño del botón de eliminar */
 }
 
 .quantity-controls .btn {
@@ -89,4 +92,23 @@
 .cart-item-subtotal {
   font-size: 14px;
   margin-top: 10px;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  font-size: 16px;
+  color: var(--color-warning);
+}
+
+.btn .btn-pay {
+  background-color: var(--color-secondary);
+  color: var(--color-text);
+  border: 2px solid var(--color-text);
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
 }
