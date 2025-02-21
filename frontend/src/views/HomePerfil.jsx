@@ -18,7 +18,7 @@ const HomePerfil = () => {
   }, [user, setCargo]);
 
   return (
-    <div>
+    <div className='home-perfil-container'>
       <h3>Mi Perfil</h3>
       <p>Datos registrados</p>
       <p>Nombre: {user?.nombre}</p>

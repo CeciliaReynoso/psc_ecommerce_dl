@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom'; // Importar Link
 import { useCart } from '../hooks/useCart'; 
 import useAuth from '../hooks/useAuth'; 
 import '../Cart.css'; 
+import { FaTrash } from 'react-icons/fa'; // Importar el icono de basura
 
 const Cart = ({ cartZIndex }) => {
   const { cart, removeFromCart, clearCart, increaseQuantity, decreaseQuantity } = useCart();
@@ -63,6 +65,14 @@ const Cart = ({ cartZIndex }) => {
     return total + (isNaN(precio) || isNaN(cantidad) ? 0 : precio * cantidad);
   }, 0);
 
+  const Regresar = () => {
+    return (
+      <div style={{ textAlign: 'center', marginBottom:'10px',marginTop: '25px' }}>
+        <Link to="/">Volver a la Página Principal</Link>
+      </div>
+    );
+  };
+
   return (
     <div className="cart-container2">
       <h1>Carrito de Compras</h1>
@@ -81,15 +91,16 @@ const Cart = ({ cartZIndex }) => {
                     <button className="btn btn-outline-dark btn-sm" onClick={() => decreaseQuantity(product.id_producto)}>-</button>
                     <span className="cart-item-quantity">{product.quantity}</span>
                     <button className="btn btn-dark btn-sm" onClick={() => increaseQuantity(product.id_producto)}>+</button>
+                    <span><button className="btn btn-dark btn-sm" onClick={() => removeFromCart(product.id_producto)}>Eliminar</button></span>
                   </div>
                   <span className="cart-item-subtotal">Sub-Total: {formatPrice(parseFloat(product.precio_venta) * parseInt(product.quantity, 10))}</span>
-                  <button className="btn btn-danger" onClick={() => removeFromCart(product.id_producto)}>Eliminar</button>
                 </div>
               </li>
             ))}
           </ul>
           <h2 className="cart-total">Total: {formatPrice(totalEnSoles)}</h2>
-          <button className="btn btn-primary" onClick={handleCheckout} disabled={!token}>Pagar</button>
+          <button className="btn btn-pay" onClick={handleCheckout} disabled={!token}>Pagar</button>
+          <Regresar /> {/* Usar el componente Regresar */}
         </div>
       )}
     </div>

@@ -72,6 +72,9 @@ body {
   flex-direction: column;
   padding-top: 10rem;
 }
+.home-perfil-container {
+  padding-top: 9rem;
+}
 .perfil-container {
   padding-top: 1rem;
   margin-left: 20px;
