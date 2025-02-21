@@ -45,10 +45,11 @@ export const RouterManager = () => {
             <Route path="*" element={<Page404 />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/cart" element={<Cart />}/>
 
             <Route path="/" element={!user || user?.rol === ROLES.CLIENTE ? <MainLayout /> : <AdminLayout />}>
               <Route index element={<Home />} />
-              <Route path="/cart" element={<AuthGuard allowedRoles={[ROLES.CLIENTE]}><Cart /></AuthGuard>} />
+              <Route path="/cart" element={<Cart />}/>
               <Route path="/profile" element={<AuthGuard allowedRoles={[ROLES.ADMIN, ROLES.COMPRADOR, ROLES.VENDEDOR, ROLES.CLIENTE]}><Profile /></AuthGuard>} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/detail/:id" element={<Detail />} />

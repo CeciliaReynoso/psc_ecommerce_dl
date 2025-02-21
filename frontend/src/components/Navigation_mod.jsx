@@ -1,48 +1,47 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import { ROLES } from '../helpers/roles';
 import { useCart } from '../hooks/useCart';
+import Cart from '../views/Cart';
 import '../Navbar.css';
 
-const Navigation = () => {
+const Navigation = ({ setCartZIndex }) => {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
   const { cart } = useCart();
+  const [showCart, setShowCart] = useState(false); 
 
   const handleLogout = () => {
     logout();
     navigate('/');
   };
 
-  // Función para formatear el precio en soles peruanos
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat('es-PE', { style: 'currency', currency: 'PEN' }).format(price);
+  const handleCartClick = () => {
+    setCartZIndex(1060);
+    setShowCart(!showCart);
+    navigate('/cart');
   };
 
   // Calcular el total en soles del carrito
-  const totalEnSoles = cart.reduce((total, product) => {
-    const precio = parseFloat(product.precio_venta);
-    const cantidad = parseInt(product.quantity, 10);
-    return total + (isNaN(precio) || isNaN(cantidad) ? 0 : precio * cantidad);
-  }, 0);
+  const totalEnSoles = cart.reduce((total, product) => total + product.precio_venta, 0);
 
   const renderButtons = () => {
     if (user) {
-      if (user.rol === ROLES.CLIENTE) {
+      if (user.rol === 'CLIENTE') {
         return (
           <>
             <button onClick={() => navigate('/')} className='btn home-btn'>Inicio</button>
             <button onClick={() => navigate('/')} className='btn home-btn'>Tienda</button>
             <button onClick={() => navigate('/home-perfil')} className='btn profile-btn'>Perfil</button>
             <button onClick={handleLogout} className='btn logout-btn'>Cerrar Sesión</button>
-            <div className='cart-container' onClick={() => navigate('/cart')}>
-              <img src='/assets/bag.PNG' alt='Carrito de compras' className='cart-icon' /> Total: {formatPrice(totalEnSoles)}
+            <div className='cart-container' onClick={handleCartClick}>
+              <img src='/assets/bag.PNG' alt='Carrito de compras' className='cart-icon' /> Total: S/{totalEnSoles.toFixed(2)}
             </div>
           </>
         );
       }
-      if (user.rol === ROLES.ADMINISTRADOR) {
+      if (user.rol === 'ADMINISTRADOR') {
         return (
           <>
             <button onClick={() => navigate('/')} className='btn home-btn'>Inicio</button>
@@ -52,7 +51,7 @@ const Navigation = () => {
           </>
         );
       }
-      if (user.rol === ROLES.COMPRADOR) {
+      if (user.rol === 'COMPRADOR') {
         return (
           <>
             <button onClick={() => navigate('/')} className='btn home-btn'>Inicio</button>
@@ -62,7 +61,7 @@ const Navigation = () => {
           </>
         );
       }
-      if (user.rol === ROLES.VENDEDOR) {
+      if (user.rol === 'VENDEDOR') {
         return (
           <>
             <button onClick={() => navigate('/')} className='btn home-btn'>Inicio</button>
@@ -77,7 +76,7 @@ const Navigation = () => {
         <>
           <button onClick={() => navigate('/login')} className='btn login-btn'>Iniciar sesión</button>
           <button onClick={() => navigate('/register')} className='btn register-btn'>Registrarse</button>
-          <div className='cart-container' onClick={() => navigate('/cart')}>
+          <div className='cart-container' onClick={handleCartClick}>
             <img src='/assets/bag.PNG' alt='Carrito de compras' className='cart-icon' />
           </div>
         </>
@@ -86,6 +85,7 @@ const Navigation = () => {
   };
 
   return (
+   <>
     <nav className="navbar">
       <div className="navbar-brand">
         <img src="/assets/Logo.png" alt="logo" className="logo" />
@@ -99,6 +99,8 @@ const Navigation = () => {
         {renderButtons()}
       </div>
     </nav>
+    
+  </>
   );
 };
 

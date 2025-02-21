@@ -1,0 +1,404 @@
+:root {
+  --color-primary: #f48b48;
+  --color-secondary: #fff;
+  --color-accent: #fedd62;
+  --color-highlight: #e79f1c;
+  --color-background: #ffffff;
+  --color-text: #665931;
+  --color-warning: #ffd34e;
+  --color-border: #e0e0e0;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+h {
+  margin-top: auto;
+}
+.recent-posts {
+  display: flex;
+  flex-direction: column;
+  gap:10px;
+  font-family: 'Nunito', 'Hind Siliguri', sans-serif;
+  padding-left: 10px;
+}
+.recent-posts a {
+  text-decoration: none;
+  color: #ba7119;
+}
+
+th,td {
+  display: table-cell;
+  justify-content: space-evenly;
+  row-gap: 10px;
+  padding: 10px;
+  text-align: left;
+}
+thead {
+  text-align: center;
+}
+td button {
+  cursor: pointer;
+  row-gap: 10px;
+  margin: 2px;
+  cursor: pointer;
+}
+body {
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: 'Nunito', 'Hind Siliguri', sans-serif;
+  height: 100vh;   
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-container {
+  padding-top: 2rem;
+  padding-left: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 45%;
+}
+.home-container {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10rem;
+}
+.perfil-container {
+  padding-top: 1rem;
+  margin-left: 20px;
+  color: var(--color-text);
+  font-weight: 600;
+}
+.hero {
+  background: url('/assets/Hero.png');
+  background-color: var(--color-accent);
+  margin-top: 0rem;
+  padding-top: 0rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-secondary);
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 100%;
+  max-height: 100%;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px 5px 10px;  
+  margin-right: auto;
+  background: var(--color-primary);
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  position: fixed; 
+  top: 0;
+  z-index: 1060; 
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color:--color-text;
+}
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  text-decoration: none;
+}
+
+.navbar-brand .brand2 {
+  padding-top: 5px;
+}
+.navbar .logo {
+  font-family: 'Dingos Stamp', 'Hind Siliguri', sans-serif;
+  font-size: 32.4px;
+  font-style: italic;
+  font-weight: 700;
+  width: 100px;
+  height: 80px;
+  border-radius: 5px;
+  color: var(--color-secondary);
+}
+.navbar .opciones {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  padding: auto;
+  
+}
+
+.navbar .opciones button {
+  margin-left: 5px;
+  /* padding: 10px 20px; */
+  background: transparent;
+  color: var(--color-text);
+  border: 2px solid var(--color-text);
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+  text-decoration: none; /* Quitar subrayado */
+}
+
+.navbar .opciones button:hover {
+  background: var(--color-secondary);
+  color: var(--color-text);
+}
+
+.app-content {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--color-primary);
+  margin: 20px auto;
+  padding-top: auto;
+  padding-left: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  color: var(--color-text);
+}
+
+.admin-container .opciones{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 20px;
+  padding: 5px;
+  background: var(--color-secondary);
+  color: var(--color-text);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.buyer-container .opciones{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: start;
+  padding: 20px;
+  background: var(--color-secondary);
+  color: var(--color-text);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+
+.cart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: var(--color-primary);
+  color: var(--color-text);
+  font-weight: 600;
+  cursor: pointer;
+
+}
+
+/* Ajustes para las tarjetas */
+.gallery-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 1.25rem; 
+    padding: auto; 
+    flex: 1 1 calc(33.333%);  /* Ajusta las tarjetas para ocupar un tercio del ancho del contenedor menos el espacio entre tarjetas */
+    height: 45%;
+  }
+  
+  .card {    
+    width: auto; /* Equivalente a 300px si 1rem es 16px */
+    height: auto;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+  
+.card:hover {
+  transform: translateY(-10px); /* Efecto de levitar al pasar el mouse */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Más sombra en hover */
+}
+
+.card img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-bottom: 1px solid #ddd; /* Línea separadora entre la imagen y el texto */
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #f87019; 
+}
+
+.card-text {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.card-link {
+  font-size: 14px;
+  color: #665931; /* Color del link */
+  text-decoration: none;
+}
+
+.card-link:hover {
+  text-decoration: underline; /* Subrayado al pasar el mouse */
+}
+
+/* Estilos para los formularios */
+.form-container {
+  background: var(--color-secondary);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  margin: 20px auto;
+}
+
+.form-container h2 {
+  font-family: 'Dingos Stamp', 'Hind Siliguri', sans-serif;
+  font-size: 32.4px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.form-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.form-container input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: solid 1px var(--color-text);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-container button {
+  width: 100%;
+  padding: 10px;
+  margin: 2px;
+  background: var(--color-primary);
+  color: var(--color-text);
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.form-container button:hover {
+  background: var(--color-accent);
+}
+
+.footer {
+  background: var(--color-primary);
+  color: var(--color-secondary);
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+}
+
+.footer .social-links {
+  margin-top: 10px;
+}
+
+.footer .social-links a {
+  margin: 0 10px;
+  color: var(--color-secondary);
+  text-decoration: none;
+}
+
+.footer .social-links a:hover {
+  color: var(--color-accent);
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    margin:10px;
+    padding: 5px;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    width: auto;
+    position: fixed;    
+    }
+
+  .app-container {
+    padding-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+    overflow-x: auto;
+    height: auto;
+    position: relative;
+  }      
+
+  .navbar-brand {
+    display: flex;
+    height: auto;
+    margin: auto;
+    justify-content: center;    
+    align-items: center;
+    flex-direction: column;
+    gap: 2px;
+    text-decoration: none;
+  }  
+
+  .navbar .opciones {
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+  }
+
+  .navbar .opciones button {
+    margin: 10px 0;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.gallery-container {
+  padding-top: 20rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.25rem; 
+  padding: 1.25rem; 
+}
+
