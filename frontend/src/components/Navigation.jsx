@@ -3,7 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import { ROLES } from '../helpers/roles';
 import { useCart } from '../hooks/useCart';
-import tiendaImage from '../../assets/tienda.png';
+import logoImage from '../../assets/logo.PNG';
+import brand1Image from '../../assets/brand1.PNG';
+import brand2Image from '../../assets/brand2.PNG';
+import brand3Image from '../../assets/brand3.PNG';
+import brand4Image from '../../assets/brand4.PNG';
+import pawsImage from '../../assets/paws.PNG';
+import bagImage from '../../assets/bag.PNG';
 import '../Navbar.css';
 
 const Navigation = () => {
@@ -89,12 +95,12 @@ const Navigation = () => {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <img src="../../assets/Logo.png" alt="logo" className="logo" />
-        <img src="../../assets/brand1.PNG" alt="brand1" className="brand" />
-        <img src="../../assets/brand2.PNG" alt="brand2" className="brand2" />
-        <img src="../../assets/brand3.PNG" alt="brand3" className="brand" />
-        <img src="../../assets/brand4.PNG" alt="brand4" className="brand" />
-        <img src="../../assets/paws.PNG" alt="paws" className="paws" />
+        <img src={logoImage} alt="logo" className="logo" />
+        <img src={brand1.PNG} alt="brand1" className="brand" />
+        <img src={brand2.PNG}alt="brand2" className="brand2" />
+        <img src={brand3} alt="brand3" className="brand" />
+        <img src={brand4} alt="brand4" className="brand" />
+        <img src={paws} alt="paws" className="paws" />
       </div>
       <div className="opciones">
         {renderButtons()}
