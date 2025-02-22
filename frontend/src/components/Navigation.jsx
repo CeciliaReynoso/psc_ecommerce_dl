@@ -37,7 +37,7 @@ const Navigation = () => {
             <button onClick={() => navigate('/home-perfil')} className='btn profile-btn'>Perfil</button>
             <button onClick={handleLogout} className='btn logout-btn'>Cerrar Sesión</button>
             <div className='cart-container' onClick={() => navigate('/cart')}>
-              <img src='/public/bag.png' alt='Carrito de compras' className='cart-icon' /> Total: {formatPrice(totalEnSoles)}
+              <img src='/bag.png' alt='Carrito de compras' className='cart-icon' /> Total: {formatPrice(totalEnSoles)}
             </div>
           </>
         );
@@ -78,7 +78,7 @@ const Navigation = () => {
           <button onClick={() => navigate('/login')} className='btn login-btn'>Iniciar sesión</button>
           <button onClick={() => navigate('/register')} className='btn register-btn'>Registrarse</button>
           <div className='cart-container' onClick={() => navigate('/cart')}>
-            <img src="/public/bag.PNG" alt='Carrito de compras' className='cart-icon' />
+            <img src="/bag.PNG" alt='Carrito de compras' className='cart-icon' />
           </div>
         </>
       );
@@ -88,12 +88,12 @@ const Navigation = () => {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <img src="/public/logo.png" alt="logo" className="logo" />
-        <img src="/public/brand1.png" alt="brand1" className="brand" />
-        <img src="/public/brand2.png" alt="brand2" className="brand2" />
-        <img src="/public/brand3.png" alt="brand3" className="brand" />
-        <img src="/public/brand4.png" alt="brand4" className="brand" />
-        <img src="/public/paws.png" alt="paws" className="paws" />
+        <img src="/logo.png" alt="logo" className="logo" />
+        <img src="/brand1.png" alt="brand1" className="brand" />
+        <img src="/brand2.png" alt="brand2" className="brand2" />
+        <img src="/brand3.png" alt="brand3" className="brand" />
+        <img src="/brand4.png" alt="brand4" className="brand" />
+        <img src="/paws.png" alt="paws" className="paws" />
       </div>
       <div className="opciones">
         {renderButtons()}
