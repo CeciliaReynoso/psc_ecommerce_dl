@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import { ROLES } from '../helpers/roles';
 import { useCart } from '../hooks/useCart';
-import logoImage from '../../assets/logo.PNG';
-import brand1Image from '../../assets/brand1.PNG';
-import brand2Image from '../../assets/brand2.PNG';
-import brand3Image from '../../assets/brand3.PNG';
-import brand4Image from '../../assets/brand4.PNG';
-import pawsImage from '../../assets/paws.PNG';
-import bagImage from '../../assets/bag.PNG';
+import logoImage from '../../assets/logo.png';
+import brand1Image from '../../assets/brand1.png';
+import brand2Image from '../../assets/brand2.png';
+import brand3Image from '../../assets/brand3.png';
+import brand4Image from '../../assets/brand4.png';
+import pawsImage from '../../assets/paws.png';
+import bagImage from '../../assets/bag.png';
 import '../Navbar.css';
 
 const Navigation = () => {
