@@ -27,6 +27,7 @@ const useAuth = () => {
           window.sessionStorage.setItem('userRol', response.data.rol);
           window.sessionStorage.setItem('userDireccion', response.data.direccion);
           window.sessionStorage.setItem('userEmail', response.data.email);
+          window.sessionStorage.setItem('userId', response.data.id);
         })
         .catch(error => {
           console.error('Error al obtener los datos del usuario:', error);
@@ -54,7 +55,7 @@ const useAuth = () => {
       window.sessionStorage.setItem('userNombre', userResponse.data.nombre);
       window.sessionStorage.setItem('userRol', userResponse.data.rol);
       window.sessionStorage.setItem('userDireccion', userResponse.data.direccion);
-      // window.location.href = '/';
+      window.sessionStorage.setItem('userId', response.data.id);
       return userResponse.data;
     } catch (error) {
       console.error('Error al iniciar sesión:', error.response.data);
@@ -68,6 +69,7 @@ const useAuth = () => {
     window.sessionStorage.removeItem('userNombre');
     window.sessionStorage.removeItem('userRol');
     window.sessionStorage.removeItem('userDireccion');
+    window.sessionStorage.setItem('userId', response.data.id);
     setUser(null);
     setToken(null);
     setAuthToken(null); // Eliminar el token de Axios

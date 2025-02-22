@@ -6,7 +6,7 @@
 
 . El cliente realiza un pedido en el sitio web
 
-. El sistema registra el pedido con un estado inicial, como "pendiente de pago"
+. El sistema registra el pedido con un estado inicial, como "pendiente de entrega"
 
 2. Recepción del Pago:
 
