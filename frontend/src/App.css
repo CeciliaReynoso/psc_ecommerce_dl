@@ -324,6 +324,7 @@ a {
 
 .form-container button:hover {
   background: var(--color-accent);
+  color: var(--color-secondary);
 }
 
 .footer {

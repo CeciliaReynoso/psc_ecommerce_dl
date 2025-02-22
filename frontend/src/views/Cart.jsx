@@ -1,13 +1,25 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom'; // Importar Link
+import { Link, useNavigate} from 'react-router-dom'; // Importar Link
 import { useCart } from '../hooks/useCart'; 
 import useAuth from '../hooks/useAuth'; 
 import '../Cart.css'; 
-import { FaTrash } from 'react-icons/fa'; // Importar el icono de basura
+
 
 const Cart = ({ cartZIndex }) => {
   const { cart, removeFromCart, clearCart, increaseQuantity, decreaseQuantity } = useCart();
-  const { token } = useAuth();
+  const { user, token } = useAuth();
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    if (!token) {
+        return;
+    }
+
+    if (user.rol !== 'CLIENTE') {
+      navigate('/no-autorizado');
+      return;
+    }
+  }, [user, navigate]);
 
   useEffect(() => {
     const cartContainer = document.querySelector('.cart-container2');
@@ -36,7 +48,7 @@ const Cart = ({ cartZIndex }) => {
       })),
     };
 
-    console.log("JSON del carrito:", JSON.stringify(cartPayload, null, 2));
+    
 
     try {
       // Guardar el carrito en sessionStorage
@@ -59,9 +71,7 @@ const Cart = ({ cartZIndex }) => {
     const precio = parseFloat(product.precio_venta);
     const cantidad = parseInt(product.quantity, 10);
 
-    // Debugging: Imprimir valores en la consola
-    console.log(`Producto: ${product.nombre}, Precio: ${precio}, Cantidad: ${cantidad}`);
-
+    
     return total + (isNaN(precio) || isNaN(cantidad) ? 0 : precio * cantidad);
   }, 0);
 
