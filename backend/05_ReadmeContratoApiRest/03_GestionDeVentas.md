@@ -16,7 +16,7 @@
 
 3. Actualizadión del Inventario:
 
-. Tras la confirmación del pago, el sistema reduce la cantidad del producto del inventario
+. Tras la confirmación del envio del pedido, el sistema reduce la cantidad del producto del inventario
 
 . El movimiento de inventario se registra como una "venta"
 
@@ -24,7 +24,7 @@
 
 .  El pedido se prepara para el envío
 
-.  El estado del pedido seactualiza a "en preparación" y luego a "enviado" una vez que se despacha.
+.  El estado del pedido se actualiza a "en preparación" y luego a "enviado" una vez que se despacha.
 
 ## Esquemas
 ### Pedido de cliente

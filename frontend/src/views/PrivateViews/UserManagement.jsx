@@ -27,7 +27,7 @@ const UserManagement = () => {
           const response = await axios.get(ENDPOINT.users, {
             headers: { Authorization: `Bearer ${token}` }
           });
-          console.log('Datos de usuarios:', response.data); // Verificar los datos recibidos
+          // console.log('Datos de usuarios:', response.data); // Verificar los datos recibidos
           setUsuarios(response.data);
         } else {
           setError('Token no encontrado');
@@ -45,7 +45,7 @@ const UserManagement = () => {
 
   const handleCrearUsuario = () => {
     // Lógica para crear un nuevo usuario
-    console.log('Crear Usuario');
+    // console.log('Crear Usuario');
     // Aquí puedes redirigir a un formulario de creación de usuario
     navigate('/crear-usuario');
   };
@@ -62,7 +62,7 @@ const UserManagement = () => {
         headers: { Authorization: `Bearer ${token}` }
       });
       setUsuarios(usuarios.filter(usuario => usuario.id !== id));
-      console.log('Usuario eliminado', id);
+      // console.log('Usuario eliminado', id);
     } catch (error) {
       console.error('Error al eliminar el usuario:', error);
     }

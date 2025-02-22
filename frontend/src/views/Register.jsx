@@ -41,7 +41,7 @@ const Register = () => {
     }
 
     // Verificar el valor del nombre antes de enviar
-    console.log('Nombre:', user.nombre);
+    // console.log('Nombre:', user.nombre);
 
     try {
       const response = await axios.post(ENDPOINT.register, user);

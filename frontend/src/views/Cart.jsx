@@ -54,7 +54,7 @@ const Cart = ({ cartZIndex }) => {
       metodo_pago: "tarjeta_credito" // Aquí deberías usar el método de pago seleccionado por el cliente
     };
 
-    console.log("JSON del carrito:", JSON.stringify(cartPayload, null, 2));
+    // console.log("JSON del carrito:", JSON.stringify(cartPayload, null, 2));
 
     try {
       const response = await axios.post('/api/pedidos', cartPayload, {
@@ -82,7 +82,7 @@ const Cart = ({ cartZIndex }) => {
     const cantidad = parseInt(product.quantity, 10);
 
     // Debugging: Imprimir valores en la consola
-    console.log(`Producto: ${product.nombre}, Precio: ${precio}, Cantidad: ${cantidad}`);
+    // console.log(`Producto: ${product.nombre}, Precio: ${precio}, Cantidad: ${cantidad}`);
 
     return total + (isNaN(precio) || isNaN(cantidad) ? 0 : precio * cantidad);
   }, 0);

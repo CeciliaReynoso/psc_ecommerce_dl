@@ -66,7 +66,7 @@ const Navigation = () => {
         return (
           <>
             <button onClick={() => navigate('/')} className='btn home-btn'>Inicio</button>
-            <button onClick={() => navigate('/')} className='btn home-btn'>Vendedor</button>
+            <button onClick={() => navigate('/seller')} className='btn home-btn'>Vendedor</button>
             <button onClick={() => navigate('/home-perfil')} className='btn profile-btn'>Perfil</button>
             <button onClick={handleLogout} className='btn logout-btn'>Cerrar sesión</button>
           </>

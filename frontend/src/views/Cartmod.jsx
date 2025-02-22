@@ -34,7 +34,7 @@ const Cart = ({ cartZIndex }) => {
       })),
     };
 
-    console.log("JSON del carrito:", JSON.stringify(cartPayload, null, 2));
+    // console.log("JSON del carrito:", JSON.stringify(cartPayload, null, 2));
 
     try {
       // Guardar el carrito en sessionStorage
