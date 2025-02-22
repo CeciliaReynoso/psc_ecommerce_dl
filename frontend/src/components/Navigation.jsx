@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import { ROLES } from '../helpers/roles';
 import { useCart } from '../hooks/useCart';
+import tiendaImage from '../../assets/tienda.png';
 import '../Navbar.css';
 
 const Navigation = () => {
@@ -37,7 +38,7 @@ const Navigation = () => {
             <button onClick={() => navigate('/home-perfil')} className='btn profile-btn'>Perfil</button>
             <button onClick={handleLogout} className='btn logout-btn'>Cerrar Sesión</button>
             <div className='cart-container' onClick={() => navigate('/cart')}>
-              <img src='/assets/bag.PNG' alt='Carrito de compras' className='cart-icon' /> Total: {formatPrice(totalEnSoles)}
+              <img src='../../assets/bag.PNG' alt='Carrito de compras' className='cart-icon' /> Total: {formatPrice(totalEnSoles)}
             </div>
           </>
         );
@@ -78,7 +79,7 @@ const Navigation = () => {
           <button onClick={() => navigate('/login')} className='btn login-btn'>Iniciar sesión</button>
           <button onClick={() => navigate('/register')} className='btn register-btn'>Registrarse</button>
           <div className='cart-container' onClick={() => navigate('/cart')}>
-            <img src='/assets/bag.PNG' alt='Carrito de compras' className='cart-icon' />
+            <img src='../../assets/bag.PNG' alt='Carrito de compras' className='cart-icon' />
           </div>
         </>
       );
@@ -88,12 +89,12 @@ const Navigation = () => {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <img src="/assets/Logo.png" alt="logo" className="logo" />
-        <img src="/assets/brand1.PNG" alt="brand1" className="brand" />
-        <img src="/assets/brand2.PNG" alt="brand2" className="brand2" />
-        <img src="/assets/brand3.PNG" alt="brand3" className="brand" />
-        <img src="/assets/brand4.PNG" alt="brand4" className="brand" />
-        <img src="/assets/paws.PNG" alt="paws" className="paws" />
+        <img src="../../assets/Logo.png" alt="logo" className="logo" />
+        <img src="../../assets/brand1.PNG" alt="brand1" className="brand" />
+        <img src="../../assets/brand2.PNG" alt="brand2" className="brand2" />
+        <img src="../../assets/brand3.PNG" alt="brand3" className="brand" />
+        <img src="../../assets/brand4.PNG" alt="brand4" className="brand" />
+        <img src="../../assets/paws.PNG" alt="paws" className="paws" />
       </div>
       <div className="opciones">
         {renderButtons()}
