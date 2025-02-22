@@ -1,4 +1,4 @@
-const { DB } = require('../db');
+const { DB } = require('../config/db');
 
 const crearPedido = async (cliente_id, estado, total, detalles) => {
   try {
