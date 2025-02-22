@@ -44,7 +44,7 @@ const Navigation = () => {
             <button onClick={() => navigate('/home-perfil')} className='btn profile-btn'>Perfil</button>
             <button onClick={handleLogout} className='btn logout-btn'>Cerrar Sesión</button>
             <div className='cart-container' onClick={() => navigate('/cart')}>
-              <img src='../../assets/bag.PNG' alt='Carrito de compras' className='cart-icon' /> Total: {formatPrice(totalEnSoles)}
+              <img src={bagImage} alt='Carrito de compras' className='cart-icon' /> Total: {formatPrice(totalEnSoles)}
             </div>
           </>
         );
@@ -85,7 +85,7 @@ const Navigation = () => {
           <button onClick={() => navigate('/login')} className='btn login-btn'>Iniciar sesión</button>
           <button onClick={() => navigate('/register')} className='btn register-btn'>Registrarse</button>
           <div className='cart-container' onClick={() => navigate('/cart')}>
-            <img src='../../assets/bag.PNG' alt='Carrito de compras' className='cart-icon' />
+            <img src={bagImage} alt='Carrito de compras' className='cart-icon' />
           </div>
         </>
       );
@@ -96,11 +96,11 @@ const Navigation = () => {
     <nav className="navbar">
       <div className="navbar-brand">
         <img src={logoImage} alt="logo" className="logo" />
-        <img src={brand1.PNG} alt="brand1" className="brand" />
-        <img src={brand2.PNG}alt="brand2" className="brand2" />
-        <img src={brand3} alt="brand3" className="brand" />
-        <img src={brand4} alt="brand4" className="brand" />
-        <img src={paws} alt="paws" className="paws" />
+        <img src={brand1Image} alt="brand1" className="brand" />
+        <img src={brand2Image}alt="brand2" className="brand2" />
+        <img src={brand3Image} alt="brand3" className="brand" />
+        <img src={brand4Image} alt="brand4" className="brand" />
+        <img src={pawsImage} alt="paws" className="paws" />
       </div>
       <div className="opciones">
         {renderButtons()}
