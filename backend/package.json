@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon index.js",
     "start": "nodemon index.js",
-    "test": "jest --detectOpenHandles"
+    "build": "echo 'No build step required for backend'"
   },
   "keywords": [],
   "author": "",
