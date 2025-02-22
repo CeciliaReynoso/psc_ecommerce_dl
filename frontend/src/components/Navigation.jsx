@@ -3,13 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import { ROLES } from '../helpers/roles';
 import { useCart } from '../hooks/useCart';
-import logoImage from '../../assets/logo.png';
-import brand1Image from '../../assets/brand1.png';
-import brand2Image from '../../assets/brand2.png';
-import brand3Image from '../../assets/brand3.png';
-import brand4Image from '../../assets/brand4.png';
-import pawsImage from '../../assets/paws.png';
-import bagImage from '../../assets/bag.png';
 import '../Navbar.css';
 
 const Navigation = () => {
@@ -44,7 +37,7 @@ const Navigation = () => {
             <button onClick={() => navigate('/home-perfil')} className='btn profile-btn'>Perfil</button>
             <button onClick={handleLogout} className='btn logout-btn'>Cerrar Sesión</button>
             <div className='cart-container' onClick={() => navigate('/cart')}>
-              <img src={bagImage} alt='Carrito de compras' className='cart-icon' /> Total: {formatPrice(totalEnSoles)}
+              <img src='/public/bag.png' alt='Carrito de compras' className='cart-icon' /> Total: {formatPrice(totalEnSoles)}
             </div>
           </>
         );
@@ -85,7 +78,7 @@ const Navigation = () => {
           <button onClick={() => navigate('/login')} className='btn login-btn'>Iniciar sesión</button>
           <button onClick={() => navigate('/register')} className='btn register-btn'>Registrarse</button>
           <div className='cart-container' onClick={() => navigate('/cart')}>
-            <img src={bagImage} alt='Carrito de compras' className='cart-icon' />
+            <img src="/public/bag.png" alt='Carrito de compras' className='cart-icon' />
           </div>
         </>
       );
@@ -95,12 +88,12 @@ const Navigation = () => {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <img src={logoImage} alt="logo" className="logo" />
-        <img src={brand1Image} alt="brand1" className="brand" />
-        <img src={brand2Image}alt="brand2" className="brand2" />
-        <img src={brand3Image} alt="brand3" className="brand" />
-        <img src={brand4Image} alt="brand4" className="brand" />
-        <img src={pawsImage} alt="paws" className="paws" />
+        <img src="/public/logo.png" alt="logo" className="logo" />
+        <img src="/public/brand1.png" alt="brand1" className="brand" />
+        <img src="/public/brand2.png" alt="brand2" className="brand2" />
+        <img src="/public/brand3.png" alt="brand3" className="brand" />
+        <img src="/public/brand4.png" alt="brand4" className="brand" />
+        <img src="/public/paws.png" alt="paws" className="paws" />
       </div>
       <div className="opciones">
         {renderButtons()}
