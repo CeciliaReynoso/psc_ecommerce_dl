@@ -7,7 +7,20 @@ import axios from 'axios'; // Importar axios para hacer las solicitudes HTTP
 
 const Cart = ({ cartZIndex }) => {
   const { cart, removeFromCart, clearCart, increaseQuantity, decreaseQuantity } = useCart();
-  const { token } = useAuth();
+  
+  const { user, token } = useAuth();
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    if (!token) {
+        return;
+    }
+
+    if (user.rol !== 'CLIENTE') {
+      navigate('/no-autorizado');
+      return;
+    }
+  }, [user, navigate]);
 
   useEffect(() => {
     const cartContainer = document.querySelector('.cart-container2');
