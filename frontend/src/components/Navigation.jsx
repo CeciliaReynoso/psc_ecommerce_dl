@@ -78,7 +78,7 @@ const Navigation = () => {
           <button onClick={() => navigate('/login')} className='btn login-btn'>Iniciar sesión</button>
           <button onClick={() => navigate('/register')} className='btn register-btn'>Registrarse</button>
           <div className='cart-container' onClick={() => navigate('/cart')}>
-            <img src="/public/bag.png" alt='Carrito de compras' className='cart-icon' />
+            <img src="/public/assets/bag.PNG" alt='Carrito de compras' className='cart-icon' />
           </div>
         </>
       );
