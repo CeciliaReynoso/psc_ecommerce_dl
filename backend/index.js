@@ -15,10 +15,7 @@ const app = express();
 app.use(express.json());
 app.use(cors({
   origin:
-    process.env.NODE_ENV === 'production' 
-    ? 'https://psc-ecommerce-dl.onrender.com'
-    : 'http://localhost:5173',
- 
+    'https://psc-ecommerce-dl.onrender.com'
 })
 );
 // app.use(cors());
