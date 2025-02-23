@@ -1,3 +1,5 @@
+const{VITE_API_URL} = import.meta.env;
+
 export const URLBASE = VITE_API_URL;
 
 export const ENDPOINT = {
