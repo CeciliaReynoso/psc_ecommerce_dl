@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
-import { Link, useNavigate} from 'react-router-dom'; // Importar Link
+import { Link } from 'react-router-dom'; // Importar Link
 import { useCart } from '../hooks/useCart'; 
 import useAuth from '../hooks/useAuth'; 
 import '../Cart.css'; 
-
+import axios from 'axios'; // Importar axios para hacer las solicitudes HTTP
 
 const Cart = ({ cartZIndex }) => {
   const { cart, removeFromCart, clearCart, increaseQuantity, decreaseQuantity } = useCart();
+  
   const { user, token } = useAuth();
   const navigate = useNavigate();
   
@@ -39,22 +40,31 @@ const Cart = ({ cartZIndex }) => {
       return;
     }
 
+    const cliente_id = window.sessionStorage.getItem('userId');
+    const direccion_envio = window.sessionStorage.getItem('userDireccion');
+
     const cartPayload = {
-      cart: cart.map(product => ({
-        id: product.id_producto,
-        name: product.nombre,
-        price: product.precio_venta,
-        quantity: product.quantity 
+      cliente_id: parseInt(cliente_id, 10),
+      productos: cart.map(product => ({
+        producto_id: product.id_producto,
+        cantidad: product.quantity,
+        precio_unitario: product.precio_venta
       })),
+      direccion_envio: direccion_envio || "123 Calle Principal, Ciudad, País", // Usar la dirección de envío del cliente si está disponible
+      metodo_pago: "tarjeta_credito" // Aquí deberías usar el método de pago seleccionado por el cliente
     };
 
-    
+    // console.log("JSON del carrito:", JSON.stringify(cartPayload, null, 2));
 
     try {
-      // Guardar el carrito en sessionStorage
-      window.sessionStorage.setItem('checkoutCart', JSON.stringify(cartPayload));
+      const response = await axios.post('/api/pedidos', cartPayload, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       alert('Checkout realizado con éxito');
       clearCart();
+      window.sessionStorage.removeItem('checkoutCart'); // Borrar los datos del checkout
     } catch (error) {
       console.error("Error en el checkout:", error);
       alert('Hubo un problema con el checkout. Inténtelo de nuevo.');
@@ -71,13 +81,16 @@ const Cart = ({ cartZIndex }) => {
     const precio = parseFloat(product.precio_venta);
     const cantidad = parseInt(product.quantity, 10);
 
-    
+    // Debugging: Imprimir valores en la consola
+    // console.log(`Producto: ${product.nombre}, Precio: ${precio}, Cantidad: ${cantidad}`);
+
     return total + (isNaN(precio) || isNaN(cantidad) ? 0 : precio * cantidad);
   }, 0);
 
   const Regresar = () => {
     return (
-      <div style={{ textAlign: 'center', marginBottom:'10px',marginTop: '25px' }}>
+      <div style={{ textAlign: 'center', marginTop: '50px' }}>
+        <h1>Volver a la página principal</h1>
         <Link to="/">Volver a la Página Principal</Link>
       </div>
     );
