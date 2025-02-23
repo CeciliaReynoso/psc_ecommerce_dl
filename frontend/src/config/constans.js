@@ -1,6 +1,4 @@
-const{VITE_API_URL} = import.meta.env;
-
-export const URLBASE = VITE_API_URL;
+export const URLBASE = 'http://localhost:3000';
 
 export const ENDPOINT = {
   // Endpoints públicos
