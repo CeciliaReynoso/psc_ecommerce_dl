@@ -37,7 +37,7 @@ const Navigation = () => {
             <button onClick={() => navigate('/home-perfil')} className='btn profile-btn'>Perfil</button>
             <button onClick={handleLogout} className='btn logout-btn'>Cerrar Sesión</button>
             <div className='cart-container' onClick={() => navigate('/cart')}>
-              <img src='/bag.png' alt='Carrito de compras' className='cart-icon' /> Total: {formatPrice(totalEnSoles)}
+              <img src='/carrito.png' alt='Carrito de compras' className='cart-icon' /> Total: {formatPrice(totalEnSoles)}
             </div>
           </>
         );
@@ -78,7 +78,7 @@ const Navigation = () => {
           <button onClick={() => navigate('/login')} className='btn login-btn'>Iniciar sesión</button>
           <button onClick={() => navigate('/register')} className='btn register-btn'>Registrarse</button>
           <div className='cart-container' onClick={() => navigate('/cart')}>
-            <img src="/bag.PNG" alt='Carrito de compras' className='cart-icon' />
+            <img src="/carrito.png" alt='Carrito de compras' className='cart-icon' />
           </div>
         </>
       );
