@@ -50,12 +50,12 @@ body {
   background: var(--color-background);
   color: var(--color-text);
   font-family: 'Nunito', 'Hind Siliguri', sans-serif;   
-  width: 75%;
+  width: 100%;
   overflow-x: auto;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  max-height: 75vh;
+  max-height: 100vh;
 }
 
 .app-container {
