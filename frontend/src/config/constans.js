@@ -1,4 +1,4 @@
-export const URLBASE = 'http://localhost:3000';
+export const URLBASE = VITE_API_URL;
 
 export const ENDPOINT = {
   // Endpoints públicos
