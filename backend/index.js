@@ -17,12 +17,12 @@ app.use(cors({
   origin:
     process.env.NODE_ENV === 'production' 
     ? 'https://psc-ecommerce-dl.onrender.com'
-    : 'http://localhost:3000',
+    : 'http://localhost:5173',
  
 })
 );
 // app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(bodyParser.json());
 
 app.use("/", usuariosRoutes);
