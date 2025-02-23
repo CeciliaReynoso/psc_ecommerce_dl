@@ -229,8 +229,9 @@ a {
   }
   
   .card {
-    flex: 1 1 calc(33.333% - 1.25rem); /* Ajusta las tarjetas para ocupar un tercio del ancho del contenedor menos el espacio entre tarjetas */
+    /* flex: 1 1 calc(33.333% - 1.25rem);  */
     max-width: 18.75rem; /* Equivalente a 300px si 1rem es 16px */
+    max-height: 37rem;
     background-color: #f8f9fa;
     border: 1px solid #ddd;
     border-radius: 8px;
