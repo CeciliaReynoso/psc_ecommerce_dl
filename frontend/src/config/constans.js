@@ -1,4 +1,5 @@
-export const URLBASE = 'https://psc-ecommerce-dl-backend.onrender.com';
+// export const URLBASE = 'https://psc-ecommerce-dl-backend.onrender.com';
+export const URLBASE = "http://localhost:3000"
 
 export const ENDPOINT = {
   // Endpoints públicos
