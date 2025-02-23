@@ -230,7 +230,7 @@ a {
   
   .card {
     /* flex: 1 1 calc(33.333% - 1.25rem);  */
-    max-width: 18.75rem; /* Equivalente a 300px si 1rem es 16px */
+    max-width: 18rem; /* Equivalente a 300px si 1rem es 16px */
     max-height: 37rem;
     background-color: #f8f9fa;
     border: 1px solid #ddd;
